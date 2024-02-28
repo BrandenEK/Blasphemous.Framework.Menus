@@ -12,6 +12,9 @@ public class MenuFramework : BlasMod
 {
     internal MenuFramework() : base(ModInfo.MOD_ID, ModInfo.MOD_NAME, ModInfo.MOD_AUTHOR, ModInfo.MOD_VERSION) { }
 
+    private Sprite _cursorIcon;
+    internal Sprite CursorIcon => _cursorIcon;
+
     private MenuCollection _newGameMenus;
     private MenuCollection _loadGameMenus;
     private MenuCollection CurrentMenuCollection => _isContinue ? _loadGameMenus : _newGameMenus;
