@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
 
@@ -9,6 +10,8 @@ public abstract class ModMenu(string title, int priority)
 {
     internal string Title { get; } = title;
     internal int Priority { get; } = priority;
+
+    internal MenuComponent UI { get; private set; }
 
     /// <summary>
     /// Called when the menus are first opened
@@ -35,30 +38,30 @@ public abstract class ModMenu(string title, int priority)
     /// </summary>
     public virtual void OnHide() { }
 
-    ///// <summary>
-    ///// Creates the specific UI for this menu if it doesnt already exist
-    ///// </summary>
-    //internal void CreateUI(bool isFirst, bool isLast)
-    //{
-    //    if (UI != null)
-    //        return;
+    /// <summary>
+    /// Creates the specific UI for this menu if it doesnt already exist
+    /// </summary>
+    internal void CreateUI(bool isFirst, bool isLast)
+    {
+        if (UI != null)
+            return;
 
-    //    UI = MenuModder.CreateBaseMenu(OwnerMod, Title, isFirst, isLast);
-    //    CreateUI(UI.transform.Find("Main Section"));
-    //}
+        UI = Main.MenuFramework.CreateBaseMenu(Title, isFirst, isLast);
+        CreateUI(UI.transform.Find("Main Section"));
+    }
 
-    ///// <summary>
-    ///// Adds all menu-specific UI to its base UI object
-    ///// </summary>
-    //protected internal abstract void CreateUI(Transform ui);
+    /// <summary>
+    /// Adds all menu-specific UI to its base UI object
+    /// </summary>
+    protected internal abstract void CreateUI(Transform ui);
 
-    ///// <summary>
-    ///// Adds an event to occur whenever this object is clicked on
-    ///// </summary>
-    //protected void AddClickable(RectTransform rect, Action onClick) => UI.AddClickable(rect, onClick, null);
+    /// <summary>
+    /// Adds an event to occur whenever this object is clicked on
+    /// </summary>
+    protected void AddClickable(RectTransform rect, Action onClick) => UI.AddClickable(rect, onClick, null);
 
-    ///// <summary>
-    ///// Adds an event to occur whenever this object is clicked on or clicked off
-    ///// </summary>
-    //protected void AddClickable(RectTransform rect, Action onClick, Action onUnclick) => UI.AddClickable(rect, onClick, onUnclick);
+    /// <summary>
+    /// Adds an event to occur whenever this object is clicked on or clicked off
+    /// </summary>
+    protected void AddClickable(RectTransform rect, Action onClick, Action onUnclick) => UI.AddClickable(rect, onClick, onUnclick);
 }

@@ -1,7 +1,11 @@
-﻿using Blasphemous.ModdingAPI;
+﻿using Blasphemous.Framework.UI;
+using Blasphemous.ModdingAPI;
 using Blasphemous.ModdingAPI.Input;
+using Gameplay.UI.Others;
 using Gameplay.UI.Others.MenuLogic;
+using I2.Loc;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Blasphemous.Framework.Menus;
 
@@ -20,6 +24,7 @@ public class MenuFramework : BlasMod
     private MenuCollection CurrentMenuCollection => _isContinue ? _loadGameMenus : _newGameMenus;
     private bool IsMenuActive => CurrentMenuCollection.IsActive;
 
+    private bool _enterNextFrame = false;
     private bool _isContinue = false;
     private int _currentSlot = 0;
 
@@ -29,15 +34,31 @@ public class MenuFramework : BlasMod
         _loadGameMenus = new MenuCollection(MenuRegister.LoadGameMenus, OnFinishMenu, OnCancelMenu);
     }
 
+    protected override void OnLevelUnloaded(string oldLevel, string newLevel)
+    {
+        if (oldLevel == "MainMenu")
+            CurrentMenuCollection.ForceClose();
+    }
+
     protected override void OnUpdate()
     {
         if (!IsMenuActive)
             return;
 
-        if (InputHandler.GetButtonDown(ButtonCode.UISubmit))
+        if (_enterNextFrame)
+        {
+            _enterNextFrame = false;
             CurrentMenuCollection.ShowNextMenu();
+        }
+
+        if (InputHandler.GetButtonDown(ButtonCode.UISubmit))
+        {
+            _enterNextFrame = true;
+        }
         else if (InputHandler.GetButtonDown(ButtonCode.UICancel))
+        {
             CurrentMenuCollection.ShowPreviousMenu();
+        }
     }
 
     public bool TryStartGame(int slot, bool isContinue)
@@ -80,6 +101,68 @@ public class MenuFramework : BlasMod
         //_mainMenuCache.Value.OpenSlotMenu();
         //_mainMenuCache.Value.slotsList.SelectElement(_currentSlot);
         SlotsMenu.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Creates a new empty menu UI
+    /// </summary>
+    internal MenuComponent CreateBaseMenu(string title, bool isFirst, bool isLast)
+    {
+        //// Create copy for new settings menu
+        //var settingsMenu = Object.Instantiate(_slotsMenuCache.Value, _slotsMenuCache.Value.transform.parent);
+        //Object.Destroy(settingsMenu.transform.Find("SlotsList").gameObject);
+
+        //// Change text of title
+        //var title = settingsMenu.transform.Find("Header").GetComponent<UIPixelTextWithShadow>();
+        //mod.LocalizationHandler.AddPixelTextLocalizer(title, header);
+
+        //// Change text of buttons
+        //var newBtn = settingsMenu.transform.Find("Buttons/Button A/New").gameObject;
+        //var continueBtn = settingsMenu.transform.Find("Buttons/Button A/Continue").gameObject;
+        //var cancelBtn = settingsMenu.transform.Find("Buttons/Back").gameObject;
+
+        //newBtn.SetActive(true);
+        //continueBtn.SetActive(false);
+        //cancelBtn.SetActive(true);
+
+        //Main.ModdingAPI.LocalizationHandler.AddPixelTextLocalizer(
+        //    newBtn.GetComponentInChildren<UIPixelTextWithShadow>(), isLast ? (_isNewGame ? "btnbgn" : "btncnt") : "btnnxt");
+        //Main.ModdingAPI.LocalizationHandler.AddPixelTextLocalizer(
+        //    cancelBtn.GetComponentInChildren<UIPixelTextWithShadow>(), isFirst ? "btncnc" : "btnpvs");
+
+        LogError($"Creating base menu for {title}");
+
+        // Duplicate slot menu
+        GameObject settingsMenu = Object.Instantiate(SlotsMenu.gameObject, UIModder.Parents.CanvasHighRes);
+        settingsMenu.name = $"Menu {title}";
+        //settingsMenu.transform.localScale = new Vector3(3, 3, 1);
+        //settingsMenu.GetComponent<RectTransform>()
+            //.SetXRange(0, 1)
+            //.SetYRange(0, 1)
+            //.SetSize(1920, 1080);
+
+        Object.Destroy(settingsMenu.GetComponent<SelectSaveSlots>());
+        Object.Destroy(settingsMenu.GetComponent<KeepFocus>());
+        Object.Destroy(settingsMenu.GetComponent<CanvasGroup>());
+        int childrenCount = settingsMenu.transform.childCount;
+        for (int i = 2; i < childrenCount; i++)
+            Object.Destroy(settingsMenu.transform.GetChild(i).gameObject);
+
+        // Set header text
+        Text headerText = settingsMenu.transform.GetChild(0).GetChild(0).GetComponent<Text>();
+        headerText.text = title;
+        Object.Destroy(headerText.GetComponent<Localize>());
+
+        // Create holder for options and all settings
+        UIModder.Create(new RectCreationOptions()
+        {
+            Name = "Main Section",
+            Parent = settingsMenu.transform,
+            Position = new Vector2(0, -30),
+            Size = new Vector2(1800, 750)
+        });
+
+        return settingsMenu.AddComponent<MenuComponent>();
     }
 
 #if DEBUG

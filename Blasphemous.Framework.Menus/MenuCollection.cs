@@ -16,28 +16,12 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
     public bool IsActive => _currentMenu != -1;
 
     /// <summary>
-    /// Adds a menu to the list in the correct spot based on priority
-    /// </summary>
-    //public void AddMenu(ModMenu menu)
-    //{
-    //    for (int i = 0; i < _menus.Count; i++)
-    //    {
-    //        if (menu.Priority < _menus[i].Priority)
-    //        {
-    //            _menus.Insert(i, menu);
-    //            return;
-    //        }
-    //    }
-    //    _menus.Add(menu);
-    //}
-
-    /// <summary>
     /// Activates a specific menu
     /// </summary>
     private void ShowMenu(int index)
     {
         ModMenu menu = _menus[index];
-        //menu.UI?.gameObject.SetActive(true);
+        menu.UI?.gameObject.SetActive(true);
         menu.OnShow();
 
         _currentMenu = index;
@@ -50,7 +34,7 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
     {
         ModMenu menu = _menus[index];
         menu.OnHide();
-        //menu.UI?.gameObject.SetActive(false);
+        menu.UI?.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -63,7 +47,7 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
 
         for (int i = 0; i < _menus.Count; i++)
         {
-            //_menus[i].CreateUI(i == 0, i == _menus.Count - 1);
+            _menus[i].CreateUI(i == 0, i == _menus.Count - 1);
             _menus[i].OnStart();
         }
 
@@ -86,7 +70,6 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
         _menus[_currentMenu].OnHide();
 
         // Otherwise, finish the menu
-        _currentMenu = -1;
         foreach (var menu in _menus)
             menu.OnFinish();
         onFinish();
@@ -111,5 +94,17 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
         foreach (var menu in _menus)
             menu.OnCancel();
         onCancel();
+    }
+
+    /// <summary>
+    /// Forcefully hides the UI for all menus
+    /// </summary>
+    public void ForceClose()
+    {
+        _currentMenu = -1;
+        foreach (var menu in _menus)
+        {
+            menu.UI?.gameObject.SetActive(false);
+        }
     }
 }
