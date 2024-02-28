@@ -54,8 +54,7 @@ public class MenuFramework : BlasMod
     /// </summary>
     private void StartMenu()
     {
-        //_slotsMenuCache.Value.SetActive(false);
-        //CoreCache.Input.ClearAllInputBlocks();
+        SlotsMenu.gameObject.SetActive(false);
         CurrentMenuCollection.StartMenu();
     }
 
@@ -64,11 +63,9 @@ public class MenuFramework : BlasMod
     /// </summary>
     private void OnFinishMenu()
     {
-        //temp
-        SelectSaveSlots slotsMenu = Object.FindObjectOfType<SelectSaveSlots>();
-
         Menu_Play_Patch.StartGameFlag = true;
-        slotsMenu.OnAcceptSlots(_currentSlot);
+        SlotsMenu.gameObject.SetActive(true);
+        SlotsMenu.OnAcceptSlots(_currentSlot);
         Menu_Play_Patch.StartGameFlag = false;
     }
 
@@ -79,6 +76,7 @@ public class MenuFramework : BlasMod
     {
         //_mainMenuCache.Value.OpenSlotMenu();
         //_mainMenuCache.Value.slotsList.SelectElement(_currentSlot);
+        SlotsMenu.gameObject.SetActive(true);
     }
 
 #if DEBUG
@@ -93,4 +91,15 @@ public class MenuFramework : BlasMod
         provider.RegisterLoadGameMenu(new TestMenu("Loading game...", 50));
     }
 #endif
+
+    private SelectSaveSlots x_slotsMenu;
+    private SelectSaveSlots SlotsMenu
+    {
+        get
+        {
+            if (x_slotsMenu == null)
+                x_slotsMenu = Object.FindObjectOfType<SelectSaveSlots>();
+            return x_slotsMenu;
+        }
+    }
 }
