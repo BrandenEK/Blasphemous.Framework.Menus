@@ -1,5 +1,7 @@
 ﻿using Blasphemous.ModdingAPI;
 using Blasphemous.ModdingAPI.Input;
+using Gameplay.UI.Others.MenuLogic;
+using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
 
@@ -16,6 +18,7 @@ public class MenuFramework : BlasMod
     private bool IsMenuActive => CurrentMenuCollection.IsActive;
 
     private bool _isContinue = false;
+    private int _currentSlot = 0;
 
     protected override void OnAllInitialized()
     {
@@ -34,8 +37,9 @@ public class MenuFramework : BlasMod
             CurrentMenuCollection.ShowPreviousMenu();
     }
 
-    public bool TryStartGame(bool isContinue)
+    public bool TryStartGame(int slot, bool isContinue)
     {
+        _currentSlot = slot;
         _isContinue = isContinue;
 
         if (CurrentMenuCollection.IsEmpty)
@@ -60,13 +64,11 @@ public class MenuFramework : BlasMod
     /// </summary>
     private void OnFinishMenu()
     {
+        //temp
+        SelectSaveSlots slotsMenu = Object.FindObjectOfType<SelectSaveSlots>();
+
         Menu_Play_Patch.StartGameFlag = true;
-
-        //if (_isContinue)
-        //    _mainMenuCache.Value.LoadGame(_currentSlot);
-        //else
-        //    _mainMenuCache.Value.NewGame(_currentSlot);
-
+        slotsMenu.OnAcceptSlots(_currentSlot);
         Menu_Play_Patch.StartGameFlag = false;
     }
 
