@@ -22,6 +22,10 @@ internal class TestMenu(string title, int priority) : ModMenu(title, priority)
         {
             Name = "test",
             Parent = ui,
-        }).AddImage(new ImageCreationOptions() { });
+            Size = new Vector2(30, 30)
+        }).AddImage(new ImageCreationOptions()
+        {
+
+        });
     }
 }

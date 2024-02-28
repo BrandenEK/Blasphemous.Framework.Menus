@@ -108,32 +108,8 @@ public class MenuFramework : BlasMod
     /// </summary>
     internal MenuComponent CreateBaseMenu(string title, bool isFirst, bool isLast)
     {
-        //// Create copy for new settings menu
-        //var settingsMenu = Object.Instantiate(_slotsMenuCache.Value, _slotsMenuCache.Value.transform.parent);
-        //Object.Destroy(settingsMenu.transform.Find("SlotsList").gameObject);
-
-        //// Change text of title
-        //var title = settingsMenu.transform.Find("Header").GetComponent<UIPixelTextWithShadow>();
-        //mod.LocalizationHandler.AddPixelTextLocalizer(title, header);
-
-        //// Change text of buttons
-        //var newBtn = settingsMenu.transform.Find("Buttons/Button A/New").gameObject;
-        //var continueBtn = settingsMenu.transform.Find("Buttons/Button A/Continue").gameObject;
-        //var cancelBtn = settingsMenu.transform.Find("Buttons/Back").gameObject;
-
-        //newBtn.SetActive(true);
-        //continueBtn.SetActive(false);
-        //cancelBtn.SetActive(true);
-
-        //Main.ModdingAPI.LocalizationHandler.AddPixelTextLocalizer(
-        //    newBtn.GetComponentInChildren<UIPixelTextWithShadow>(), isLast ? (_isNewGame ? "btnbgn" : "btncnt") : "btnnxt");
-        //Main.ModdingAPI.LocalizationHandler.AddPixelTextLocalizer(
-        //    cancelBtn.GetComponentInChildren<UIPixelTextWithShadow>(), isFirst ? "btncnc" : "btnpvs");
-
-        LogError($"Creating base menu for {title}");
-
         // Duplicate slot menu
-        GameObject settingsMenu = Object.Instantiate(SlotsMenu.gameObject, UIModder.Parents.CanvasHighRes);
+        GameObject settingsMenu = Object.Instantiate(SlotsMenu.gameObject, UIModder.Parents.CanvasStandard);
         settingsMenu.name = $"Menu {title}";
         //settingsMenu.transform.localScale = new Vector3(3, 3, 1);
         //settingsMenu.GetComponent<RectTransform>()
@@ -141,20 +117,36 @@ public class MenuFramework : BlasMod
             //.SetYRange(0, 1)
             //.SetSize(1920, 1080);
 
+        // Remove slot menu stuff
         Object.Destroy(settingsMenu.GetComponent<SelectSaveSlots>());
         Object.Destroy(settingsMenu.GetComponent<KeepFocus>());
         Object.Destroy(settingsMenu.GetComponent<CanvasGroup>());
         int childrenCount = settingsMenu.transform.childCount;
-        for (int i = 2; i < childrenCount; i++)
-            Object.Destroy(settingsMenu.transform.GetChild(i).gameObject);
+        for (int i = 0; i < childrenCount; i++)
+        {
+            if (i != 0 && i != 1 && i != 3)
+                Object.Destroy(settingsMenu.transform.GetChild(i).gameObject);
+        }
 
         // Set header text
         Text headerText = settingsMenu.transform.GetChild(0).GetChild(0).GetComponent<Text>();
         headerText.text = title;
-        Object.Destroy(headerText.GetComponent<Localize>());
+        //Object.Destroy(headerText.GetComponent<Localize>());
+
+        // Set 'A' button text
+        Text aButtonText = settingsMenu.transform.GetChild(3).GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>();
+        aButtonText.text = isLast ? (_isContinue ? "Continue" : "Begin") : "Next";
+
+        // Set 'B' button text
+        Text bButtonText = settingsMenu.transform.GetChild(3).GetChild(1).GetChild(1).GetComponent<Text>();
+        bButtonText.text = isFirst ? "Cancel" : "Previous";
+
+        // Destroy all localize components in children
+        foreach (Localize loc in settingsMenu.GetComponentsInChildren<Localize>())
+            Object.Destroy(loc);
 
         // Create holder for options and all settings
-        UIModder.Create(new RectCreationOptions()
+        UIModder.Create(new RectCreationOptions() // Fix !!!
         {
             Name = "Main Section",
             Parent = settingsMenu.transform,
