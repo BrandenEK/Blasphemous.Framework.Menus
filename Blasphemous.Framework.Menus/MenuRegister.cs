@@ -30,6 +30,5 @@ public static class MenuRegister
 
         _loadMenus.Add(menu);
         Main.MenuFramework.Log($"Registered load game menu: {menu.GetType().Name}");
-
     }
 }

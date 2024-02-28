@@ -2,6 +2,9 @@
 
 namespace Blasphemous.Framework.Menus;
 
+/// <summary>
+/// The abstract form of an in-game menu
+/// </summary>
 public abstract class ModMenu(string title, int priority)
 {
     internal string Title { get; } = title;

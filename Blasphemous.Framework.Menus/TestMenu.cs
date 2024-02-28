@@ -1,7 +1,7 @@
 ﻿
 namespace Blasphemous.Framework.Menus;
 
-public class TestMenu(string title, int priority) : ModMenu(title, priority)
+internal class TestMenu(string title, int priority) : ModMenu(title, priority)
 {
     public override void OnShow()
     {
