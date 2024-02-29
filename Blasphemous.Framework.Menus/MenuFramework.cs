@@ -119,13 +119,9 @@ public class MenuFramework : BlasMod
     internal MenuComponent CreateBaseMenu(string title, bool isFirst, bool isLast)
     {
         // Duplicate slot menu
-        GameObject settingsMenu = Object.Instantiate(SlotsMenu.gameObject, UIModder.Parents.CanvasStandard);
+        GameObject settingsMenu = Object.Instantiate(SlotsMenu.gameObject, UIModder.Parents.CanvasHighRes);
         settingsMenu.name = $"Menu {title}";
-        //settingsMenu.transform.localScale = new Vector3(3, 3, 1);
-        //settingsMenu.GetComponent<RectTransform>()
-            //.SetXRange(0, 1)
-            //.SetYRange(0, 1)
-            //.SetSize(1920, 1080);
+        RescaleUIElements(settingsMenu);
 
         // Remove slot menu stuff
         Object.Destroy(settingsMenu.GetComponent<SelectSaveSlots>());
@@ -141,7 +137,6 @@ public class MenuFramework : BlasMod
         // Set header text
         Text headerText = settingsMenu.transform.GetChild(0).GetChild(0).GetComponent<Text>();
         headerText.text = title;
-        //Object.Destroy(headerText.GetComponent<Localize>());
 
         // Set 'A' button text
         Text aButtonText = settingsMenu.transform.GetChild(3).GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>();
@@ -165,10 +160,27 @@ public class MenuFramework : BlasMod
             YRange = new Vector2(0, 1),
             Size = new Vector2(1, 1)
         });
-        main.offsetMin = new Vector2(65, 50);
-        main.offsetMax = new Vector2(-65, -85);
+        main.offsetMin = new Vector2(200, 150);
+        main.offsetMax = new Vector2(-200, -250);
 
         return settingsMenu.AddComponent<MenuComponent>();
+    }
+
+    /// <summary>
+    /// When moving to the HighRes canvas, everything needs to be scaled up by 3
+    /// </summary>
+    private void RescaleUIElements(GameObject parent)
+    {
+        foreach (RectTransform rect in parent.GetComponentsInChildren<RectTransform>())
+        {
+            Main.MenuFramework.LogWarning($"Changing size {rect.sizeDelta} to {rect.sizeDelta * 3}");
+            rect.sizeDelta *= 3;
+            rect.anchoredPosition *= 3;
+
+            Text t = rect.GetComponent<Text>();
+            if (t != null)
+                t.fontSize *= 3;
+        }
     }
 
 #if DEBUG
