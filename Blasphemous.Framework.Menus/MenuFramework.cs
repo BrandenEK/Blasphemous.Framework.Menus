@@ -28,18 +28,27 @@ public class MenuFramework : BlasMod
     private bool _isContinue = false;
     private int _currentSlot = 0;
 
+    /// <summary>
+    /// Initialize the menu collections with all registered menus
+    /// </summary>
     protected override void OnAllInitialized()
     {
         _newGameMenus = new MenuCollection(MenuRegister.NewGameMenus, OnFinishMenu, OnCancelMenu);
         _loadGameMenus = new MenuCollection(MenuRegister.LoadGameMenus, OnFinishMenu, OnCancelMenu);
     }
 
+    /// <summary>
+    /// Force close the menus whenever unloading the main menu
+    /// </summary>
     protected override void OnLevelUnloaded(string oldLevel, string newLevel)
     {
         if (oldLevel == "MainMenu")
             CurrentMenuCollection.ForceClose();
     }
 
+    /// <summary>
+    /// Process submit and cancel input
+    /// </summary>
     protected override void OnUpdate()
     {
         if (!IsMenuActive)
@@ -61,6 +70,9 @@ public class MenuFramework : BlasMod
         }
     }
 
+    /// <summary>
+    /// If there are menus, start the menu process, otherwise, continue normally
+    /// </summary>
     public bool TryStartGame(int slot, bool isContinue)
     {
         _currentSlot = slot;
@@ -98,8 +110,6 @@ public class MenuFramework : BlasMod
     /// </summary>
     private void OnCancelMenu()
     {
-        //_mainMenuCache.Value.OpenSlotMenu();
-        //_mainMenuCache.Value.slotsList.SelectElement(_currentSlot);
         SlotsMenu.gameObject.SetActive(true);
     }
 
