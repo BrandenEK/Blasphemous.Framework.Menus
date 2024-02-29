@@ -13,6 +13,8 @@
 
     <TargetName>MenuFramework</TargetName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetName).xml</DocumentationFile>
     <RepositoryUrl>https://github.com/BrandenEK/Blasphemous.Framework.Menus</RepositoryUrl>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
