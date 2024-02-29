@@ -173,7 +173,6 @@ public class MenuFramework : BlasMod
     {
         foreach (RectTransform rect in parent.GetComponentsInChildren<RectTransform>())
         {
-            Main.MenuFramework.LogWarning($"Changing size {rect.sizeDelta} to {rect.sizeDelta * 3}");
             rect.sizeDelta *= 3;
             rect.anchoredPosition *= 3;
 
@@ -189,10 +188,10 @@ public class MenuFramework : BlasMod
     /// </summary>
     protected override void OnRegisterServices(ModServiceProvider provider)
     {
-        provider.RegisterNewGameMenu(new TestMenu("Testing number 1", 10));
-        provider.RegisterNewGameMenu(new TestMenu("Testing number 2", 21));
+        provider.RegisterNewGameMenu(new TestMenu("Testing number 1", 10, true));
+        provider.RegisterNewGameMenu(new TestMenu("Testing number 2", 21, true));
 
-        provider.RegisterLoadGameMenu(new TestMenu("Loading game...", 50));
+        provider.RegisterLoadGameMenu(new TestMenu("Loading game...", 50, false));
     }
 #endif
 

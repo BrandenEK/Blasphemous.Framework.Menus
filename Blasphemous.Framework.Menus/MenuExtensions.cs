@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
 
@@ -9,7 +10,9 @@ internal static class MenuExtensions
         float xScale = (float)Screen.width / 1920;
         var scaling = new Vector3(xScale, xScale, (Screen.height - 1080 * xScale) * 0.5f);
 
-        Vector2 position = Camera.main.WorldToScreenPoint(rect.position);
+        //Camera cam = Object.FindObjectsOfType<Camera>().First(x => x.name == "UICamera");
+
+        Vector2 position = rect.position; // Doesn't work on different resolutions
         position = new Vector2(position.x * scaling.x, position.y * scaling.y + scaling.z);
 
         var size = new Vector2(rect.rect.width * scaling.x, rect.rect.height * scaling.y);

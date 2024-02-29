@@ -15,6 +15,8 @@ internal class MenuComponent : MonoBehaviour
         _cursorController ??= _clickables.Count > 0
             ? new RealCursor(transform)
             : new FakeCursor();
+
+        _cursorController.UpdatePosition(Input.mousePosition);
     }
 
     private void OnDisable()

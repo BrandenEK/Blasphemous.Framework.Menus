@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
 
-internal class TestMenu(string title, int priority) : ModMenu(title, priority)
+internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu(title, priority)
 {
     public override void OnShow()
     {
@@ -29,5 +29,17 @@ internal class TestMenu(string title, int priority) : ModMenu(title, priority)
         {
             Color = new Color(1, 1, 1, 0.5f)
         });
+
+        if (!hasClickable)
+            return;
+
+        RectTransform click = UIModder.Create(new RectCreationOptions()
+        {
+            Name = "Clickable",
+            Parent = ui,
+        });
+
+        click.AddImage(new ImageCreationOptions() { Color = Color.blue });
+        AddClickable(click, () => Main.MenuFramework.Log("Clicked image"));
     }
 }
