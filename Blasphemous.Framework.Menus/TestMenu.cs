@@ -22,10 +22,12 @@ internal class TestMenu(string title, int priority) : ModMenu(title, priority)
         {
             Name = "test",
             Parent = ui,
-            Size = new Vector2(30, 30)
+            XRange = new Vector2(0, 1),
+            YRange = new Vector2(0, 1),
+            Size = Vector2.one,
         }).AddImage(new ImageCreationOptions()
         {
-
+            Color = new Color(1, 1, 1, 0.5f)
         });
     }
 }

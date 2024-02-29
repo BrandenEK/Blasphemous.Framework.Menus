@@ -146,13 +146,17 @@ public class MenuFramework : BlasMod
             Object.Destroy(loc);
 
         // Create holder for options and all settings
-        UIModder.Create(new RectCreationOptions() // Fix !!!
+        RectTransform main = UIModder.Create(new RectCreationOptions()
         {
             Name = "Main Section",
             Parent = settingsMenu.transform,
-            Position = new Vector2(0, -30),
-            Size = new Vector2(1800, 750)
+            Pivot = new Vector2(0.5f, 0.5f),
+            XRange = new Vector2(0, 1),
+            YRange = new Vector2(0, 1),
+            Size = new Vector2(1, 1)
         });
+        main.offsetMin = new Vector2(65, 50);
+        main.offsetMax = new Vector2(-65, -85);
 
         return settingsMenu.AddComponent<MenuComponent>();
     }
