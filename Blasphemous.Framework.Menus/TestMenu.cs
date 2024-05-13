@@ -33,13 +33,15 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
         if (!hasClickable)
             return;
 
-        RectTransform click = UIModder.Create(new RectCreationOptions()
-        {
-            Name = "Clickable",
-            Parent = ui,
-        });
+        //RectTransform click = UIModder.Create(new RectCreationOptions()
+        //{
+        //    Name = "Clickable",
+        //    Parent = ui,
+        //});
 
-        click.AddImage(new ImageCreationOptions() { Color = Color.blue });
-        AddClickable(click, () => Main.MenuFramework.Log("Clicked image"));
+        //click.AddImage(new ImageCreationOptions() { Color = Color.blue });
+        //AddClickable(click, () => Main.MenuFramework.Log("Clicked image"));
+
+        var toggle = OptionCreator.CreateToggleOption("test1", ui, new Vector2(0, 0), 36, Color.black, "Test toggle");
     }
 }

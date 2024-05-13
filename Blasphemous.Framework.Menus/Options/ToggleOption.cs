@@ -40,6 +40,8 @@ public class ToggleOption : MonoBehaviour
     public void Initialize(Image toggleBox)
     {
         _toggleBox = toggleBox;
+
+        UpdateStatus();
     }
 
     private void UpdateStatus()
