@@ -75,7 +75,7 @@ public class MenuFramework : BlasMod
     /// <summary>
     /// If there are menus, start the menu process, otherwise, continue normally
     /// </summary>
-    public bool TryStartGame(int slot, bool isContinue)
+    internal bool TryStartGame(int slot, bool isContinue)
     {
         _currentSlot = slot;
         _isContinue = isContinue;
