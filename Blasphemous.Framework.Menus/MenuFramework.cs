@@ -17,8 +17,7 @@ public class MenuFramework : BlasMod
 {
     internal MenuFramework() : base(ModInfo.MOD_ID, ModInfo.MOD_NAME, ModInfo.MOD_AUTHOR, ModInfo.MOD_VERSION) { }
 
-    private Sprite _cursorIcon;
-    internal Sprite CursorIcon => _cursorIcon;
+    public IconLoader IconLoader { get; private set; }
 
     private MenuCollection _newGameMenus;
     private MenuCollection _loadGameMenus;
@@ -30,12 +29,18 @@ public class MenuFramework : BlasMod
     private int _currentSlot = 0;
 
     /// <summary>
+    /// Load and setup ui
+    /// </summary>
+    protected override void OnInitialize()
+    {
+        IconLoader = new IconLoader(FileHandler);
+    }
+
+    /// <summary>
     /// Initialize the menu collections with all registered menus
     /// </summary>
     protected override void OnAllInitialized()
     {
-        FileHandler.LoadDataAsSprite("cursor.png", out _cursorIcon);
-
         _newGameMenus = new MenuCollection(MenuRegister.NewGameMenus, OnFinishMenu, OnCancelMenu);
         _loadGameMenus = new MenuCollection(MenuRegister.LoadGameMenus, OnFinishMenu, OnCancelMenu);
     }

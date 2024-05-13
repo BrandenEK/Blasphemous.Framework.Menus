@@ -21,10 +21,10 @@ internal class RealCursor : ICursorController
             XRange = Vector2.zero,
             YRange = Vector2.zero,
             Pivot = new Vector2(0, 1),
-            Size = Main.MenuFramework.CursorIcon.rect.size
+            Size = Main.MenuFramework.IconLoader.Cursor.rect.size
         }).AddImage(new ImageCreationOptions()
         {
-            Sprite = Main.MenuFramework.CursorIcon
+            Sprite = Main.MenuFramework.IconLoader.Cursor
         }).rectTransform;
     }
 
