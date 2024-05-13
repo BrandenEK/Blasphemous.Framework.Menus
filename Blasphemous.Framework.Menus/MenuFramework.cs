@@ -33,6 +33,8 @@ public class MenuFramework : BlasMod
     /// </summary>
     protected override void OnAllInitialized()
     {
+        FileHandler.LoadDataAsSprite("cursor.png", out _cursorIcon);
+
         _newGameMenus = new MenuCollection(MenuRegister.NewGameMenus, OnFinishMenu, OnCancelMenu);
         _loadGameMenus = new MenuCollection(MenuRegister.LoadGameMenus, OnFinishMenu, OnCancelMenu);
     }
