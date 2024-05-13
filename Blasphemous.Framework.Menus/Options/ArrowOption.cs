@@ -51,6 +51,7 @@ public class ArrowOption : MonoBehaviour
         _rightArrow = rightArrow;
 
         _options = options;
+        UpdateStatus();
     }
 
     private void UpdateStatus()

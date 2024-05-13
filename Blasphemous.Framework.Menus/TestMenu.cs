@@ -43,5 +43,9 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
         //AddClickable(click, () => Main.MenuFramework.Log("Clicked image"));
 
         var toggle = OptionCreator.CreateToggleOption("test1", ui, new Vector2(0, 0), 36, Color.black, "Test toggle");
+        var arrow = OptionCreator.CreateArrowOption("test2", ui, new Vector2(0, -100), 36, Color.white, "Test arrow",
+        [
+            "Option 1", "Option 2", "Option 3"
+        ]);
     }
 }
