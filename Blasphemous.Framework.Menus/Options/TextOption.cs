@@ -69,6 +69,7 @@ public class TextOption : MonoBehaviour
         _maxLength = maxLength;
 
         _currentValue = string.Empty;
+        UpdateStatus();
     }
 
     private void UpdateStatus()

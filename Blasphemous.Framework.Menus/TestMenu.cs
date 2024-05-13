@@ -47,5 +47,6 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
         [
             "Option 1", "Option 2", "Option 3"
         ]);
+        var text = OptionCreator.CreateTextOption("test3", ui, new Vector2(0, 100), 36, Color.white, 300, "Test text", false, true, 16);
     }
 }
