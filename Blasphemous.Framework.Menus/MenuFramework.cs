@@ -1,4 +1,5 @@
-﻿using Blasphemous.Framework.UI;
+﻿using Blasphemous.Framework.Menus.Patches;
+using Blasphemous.Framework.UI;
 using Blasphemous.ModdingAPI;
 using Blasphemous.ModdingAPI.Input;
 using Gameplay.UI.Others;

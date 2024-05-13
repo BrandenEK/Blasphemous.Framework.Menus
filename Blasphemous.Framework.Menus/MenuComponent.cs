@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Blasphemous.Framework.Menus.Extensions;
 using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
