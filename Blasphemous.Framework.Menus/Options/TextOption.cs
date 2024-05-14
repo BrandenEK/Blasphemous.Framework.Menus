@@ -16,7 +16,7 @@ public class TextOption : MonoBehaviour
     private bool _allowZero;
     private int _maxLength;
 
-    private string _currentValue;
+    private string _currentValue = string.Empty;
     private bool _selected;
 
     /// <summary>

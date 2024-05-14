@@ -14,7 +14,7 @@ public class ArrowOption : MonoBehaviour
     private Image _rightArrow;
 
     private string[] _options;
-    private int _currentOption;
+    private int _currentOption = 0;
 
     /// <summary>
     /// The option that is currently selected
