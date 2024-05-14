@@ -1,0 +1,6 @@
+lang: en
+btnnxt: Next
+btnbgn: Begin
+btncnt: Continue
+btnprv: Previous
+btncnc: Cancel

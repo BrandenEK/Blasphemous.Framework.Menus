@@ -17,6 +17,9 @@ public class MenuFramework : BlasMod
 {
     internal MenuFramework() : base(ModInfo.MOD_ID, ModInfo.MOD_NAME, ModInfo.MOD_AUTHOR, ModInfo.MOD_VERSION) { }
 
+    /// <summary>
+    /// Loads and stores all UI icons
+    /// </summary>
     public IconLoader IconLoader { get; private set; }
 
     private MenuCollection _newGameMenus;
@@ -34,6 +37,7 @@ public class MenuFramework : BlasMod
     protected override void OnInitialize()
     {
         IconLoader = new IconLoader(FileHandler);
+        LocalizationHandler.RegisterDefaultLanguage("en");
     }
 
     /// <summary>
@@ -148,11 +152,11 @@ public class MenuFramework : BlasMod
 
         // Set 'A' button text
         Text aButtonText = settingsMenu.transform.GetChild(3).GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>();
-        aButtonText.text = isLast ? (_isContinue ? "Continue" : "Begin") : "Next";
+        aButtonText.text = LocalizationHandler.Localize(isLast ? (_isContinue ? "btncnt" : "btnbgn") : "btnnxt");
 
         // Set 'B' button text
         Text bButtonText = settingsMenu.transform.GetChild(3).GetChild(1).GetChild(1).GetComponent<Text>();
-        bButtonText.text = isFirst ? "Cancel" : "Previous";
+        bButtonText.text = LocalizationHandler.Localize(isFirst ? "btncnc" : "btnprv");
 
         // Destroy all localize components in children
         foreach (Localize loc in settingsMenu.GetComponentsInChildren<Localize>())
