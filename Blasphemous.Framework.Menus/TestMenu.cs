@@ -34,13 +34,15 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
         if (!hasClickable)
             return;
 
-        var creator = new OptionCreator(this);
+        var toggleCreator = new ToggleCreator(this);
+        var arrowCreator = new ArrowCreator(this);
+        var textCreator = new TextCreator(this);
 
-        var toggle = creator.CreateToggleOption("test1", ui, new Vector2(0, 0), 36, Color.black, "Test toggle");
-        var arrow = creator.CreateArrowOption("test2", ui, new Vector2(0, -100), 36, Color.white, "Test arrow",
+        var toggle = toggleCreator.CreateOption("test1", ui, new Vector2(0, 0), 36, Color.black, "Test toggle");
+        var arrow = arrowCreator.CreateOption("test2", ui, new Vector2(0, -100), 36, Color.white, "Test arrow",
         [
             "Option 1", "Option 2", "Option 3"
         ]);
-        var text = creator.CreateTextOption("test3", ui, new Vector2(0, 100), 36, Color.white, 300, "Test text", false, true, 16);
+        var text = textCreator.CreateOption("test3", ui, new Vector2(0, 100), 36, Color.white, 300, "Test text", false, true, 16);
     }
 }
