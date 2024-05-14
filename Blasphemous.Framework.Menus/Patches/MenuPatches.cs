@@ -3,7 +3,7 @@ using Gameplay.UI.Widgets;
 using HarmonyLib;
 using System.Collections.Generic;
 
-namespace Blasphemous.Framework.Menus;
+namespace Blasphemous.Framework.Menus.Patches;
 
 /// <summary>
 /// Shows the menu, or starts game if no menus or accepted

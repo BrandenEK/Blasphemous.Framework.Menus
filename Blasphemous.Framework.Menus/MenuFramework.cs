@@ -1,4 +1,5 @@
-﻿using Blasphemous.Framework.UI;
+﻿using Blasphemous.Framework.Menus.Patches;
+using Blasphemous.Framework.UI;
 using Blasphemous.ModdingAPI;
 using Blasphemous.ModdingAPI.Input;
 using Gameplay.UI.Others;
@@ -16,8 +17,7 @@ public class MenuFramework : BlasMod
 {
     internal MenuFramework() : base(ModInfo.MOD_ID, ModInfo.MOD_NAME, ModInfo.MOD_AUTHOR, ModInfo.MOD_VERSION) { }
 
-    private Sprite _cursorIcon;
-    internal Sprite CursorIcon => _cursorIcon;
+    public IconLoader IconLoader { get; private set; }
 
     private MenuCollection _newGameMenus;
     private MenuCollection _loadGameMenus;
@@ -27,6 +27,14 @@ public class MenuFramework : BlasMod
     private bool _enterNextFrame = false;
     private bool _isContinue = false;
     private int _currentSlot = 0;
+
+    /// <summary>
+    /// Load and setup ui
+    /// </summary>
+    protected override void OnInitialize()
+    {
+        IconLoader = new IconLoader(FileHandler);
+    }
 
     /// <summary>
     /// Initialize the menu collections with all registered menus
@@ -73,7 +81,7 @@ public class MenuFramework : BlasMod
     /// <summary>
     /// If there are menus, start the menu process, otherwise, continue normally
     /// </summary>
-    public bool TryStartGame(int slot, bool isContinue)
+    internal bool TryStartGame(int slot, bool isContinue)
     {
         _currentSlot = slot;
         _isContinue = isContinue;

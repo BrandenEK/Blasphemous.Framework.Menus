@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace Blasphemous.Framework.Menus;
+namespace Blasphemous.Framework.Menus.Extensions;
 
 internal static class MenuExtensions
 {
