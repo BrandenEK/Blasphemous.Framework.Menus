@@ -44,7 +44,7 @@ public abstract class ModMenu(string title, int priority)
     /// </summary>
     public virtual void OnOptionsChanged()
     {
-        // Play sound effect
+        Main.MenuFramework.SoundPlayer.Play(SoundPlayer.SfxType.ChangeSelection);
     }
 
     /// <summary>
