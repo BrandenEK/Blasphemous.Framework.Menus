@@ -10,10 +10,21 @@ public class ArrowCreator(ModMenu menu)
 {
     private readonly ModMenu _menu = menu;
 
+    /// <summary> The pixel size of the arrow images </summary>
+    public int ArrowSize { get; set; } = 36;
+    /// <summary> The pixel size of the header and option text </summary>
+    public int TextSize { get; set; } = 36;
+    /// <summary> The color of the header text </summary>
+    public Color TextColor { get; set; } = new Color32(192, 192, 192, 255);
+    /// <summary> The color of the selected option text </summary>
+    public Color TextColorAlt { get; set; } = new Color32(255, 231, 65, 255);
+    /// <summary> The pixel space in between the arrow images </summary>
+    public int ElementSpacing { get; set; } = 120;
+
     /// <summary>
     /// Adds a multi-choice setting to the UI
     /// </summary>
-    public ArrowOption CreateOption(string name, Transform parent, Vector2 position, int size, Color color, string header, string[] options)
+    public ArrowOption CreateOption(string name, Transform parent, Vector2 position, string header, string[] options)
     {
         // Create ui holder
         var holder = UIModder.Create(new RectCreationOptions()
@@ -28,12 +39,12 @@ public class ArrowCreator(ModMenu menu)
         {
             Name = "header",
             Parent = holder,
-            Position = new Vector2(0, size),
+            Position = new Vector2(0, ArrowSize),
         }).AddText(new TextCreationOptions()
         {
             Alignment = TextAnchor.MiddleCenter,
-            Color = color,
-            FontSize = size,
+            Color = TextColor,
+            FontSize = TextSize,
             Contents = header
         });
 
@@ -46,8 +57,8 @@ public class ArrowCreator(ModMenu menu)
         }).AddText(new TextCreationOptions()
         {
             Alignment = TextAnchor.MiddleCenter,
-            Color = Color.yellow,
-            FontSize = size - 5,
+            Color = TextColorAlt,
+            FontSize = TextSize - 5,
             Contents = string.Empty
         });
 
@@ -56,8 +67,8 @@ public class ArrowCreator(ModMenu menu)
         {
             Name = "left",
             Parent = holder,
-            Position = new Vector2(-150, 5),
-            Size = new Vector2(size, size)
+            Position = new Vector2(-ElementSpacing, 0),
+            Size = new Vector2(ArrowSize, ArrowSize)
         }).AddImage();
 
         // Create right arrow image
@@ -65,8 +76,8 @@ public class ArrowCreator(ModMenu menu)
         {
             Name = "right",
             Parent = holder,
-            Position = new Vector2(150, 5),
-            Size = new Vector2(size, size)
+            Position = new Vector2(ElementSpacing, 0),
+            Size = new Vector2(ArrowSize, ArrowSize)
         }).AddImage();
 
         // Initialize arrow option
