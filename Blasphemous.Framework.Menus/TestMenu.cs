@@ -1,4 +1,5 @@
-﻿using Blasphemous.Framework.UI;
+﻿using Blasphemous.Framework.Menus.Options;
+using Blasphemous.Framework.UI;
 using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
@@ -33,20 +34,13 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
         if (!hasClickable)
             return;
 
-        //RectTransform click = UIModder.Create(new RectCreationOptions()
-        //{
-        //    Name = "Clickable",
-        //    Parent = ui,
-        //});
+        var creator = new OptionCreator(this);
 
-        //click.AddImage(new ImageCreationOptions() { Color = Color.blue });
-        //AddClickable(click, () => Main.MenuFramework.Log("Clicked image"));
-
-        var toggle = OptionCreator.CreateToggleOption("test1", ui, new Vector2(0, 0), 36, Color.black, "Test toggle");
-        var arrow = OptionCreator.CreateArrowOption("test2", ui, new Vector2(0, -100), 36, Color.white, "Test arrow",
+        var toggle = creator.CreateToggleOption("test1", ui, new Vector2(0, 0), 36, Color.black, "Test toggle");
+        var arrow = creator.CreateArrowOption("test2", ui, new Vector2(0, -100), 36, Color.white, "Test arrow",
         [
             "Option 1", "Option 2", "Option 3"
         ]);
-        var text = OptionCreator.CreateTextOption("test3", ui, new Vector2(0, 100), 36, Color.white, 300, "Test text", false, true, 16);
+        var text = creator.CreateTextOption("test3", ui, new Vector2(0, 100), 36, Color.white, 300, "Test text", false, true, 16);
     }
 }
