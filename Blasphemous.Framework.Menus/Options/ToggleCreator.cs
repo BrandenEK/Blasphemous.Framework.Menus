@@ -10,10 +10,19 @@ public class ToggleCreator(ModMenu menu)
 {
     private readonly ModMenu _menu = menu;
 
+    /// <summary> The pixel size of the box image </summary>
+    public int BoxSize { get; set; } = 36;
+    /// <summary> The pixel size of the header text </summary>
+    public int TextSize { get; set; } = 36;
+    /// <summary> The color of the header text </summary>
+    public Color TextColor { get; set; } = new Color32(192, 192, 192, 255);
+    /// <summary> The pixel space in between the image and text </summary>
+    public int ElementSpacing { get; set; } = 12;
+
     /// <summary>
     /// Adds a true/false setting to the UI
     /// </summary>
-    public ToggleOption CreateOption(string name, Transform parent, Vector2 position, int size, Color color, string header)
+    public ToggleOption CreateOption(string name, Transform parent, Vector2 position, string header)
     {
         // Create ui holder
         var holder = UIModder.Create(new RectCreationOptions()
@@ -28,14 +37,14 @@ public class ToggleCreator(ModMenu menu)
         {
             Name = "header",
             Parent = holder,
-            Position = new Vector2(12, 0),
+            Position = new Vector2(ElementSpacing, 0),
             Pivot = new Vector2(0, 0.5f),
-            Size = new Vector2(100, size)
+            Size = new Vector2(100, BoxSize)
         }).AddText(new TextCreationOptions()
         {
             Alignment = TextAnchor.MiddleLeft,
-            Color = color,
-            FontSize = size,
+            Color = TextColor,
+            FontSize = TextSize,
             Contents = header
         });
 
@@ -46,7 +55,7 @@ public class ToggleCreator(ModMenu menu)
             Parent = holder,
             Position = Vector2.zero,
             Pivot = new Vector2(1, 0.5f),
-            Size = new Vector2(size, size)
+            Size = new Vector2(BoxSize, BoxSize)
         }).AddImage();
 
         // Initialize toggle option
