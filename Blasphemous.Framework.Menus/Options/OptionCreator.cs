@@ -1,7 +1,5 @@
 ﻿using Blasphemous.Framework.UI;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Blasphemous.Framework.Menus.Options;
 
@@ -54,7 +52,7 @@ public class OptionCreator
             Position = Vector2.zero,
             Pivot = new Vector2(1, 0.5f),
             Size = new Vector2(size, size)
-        }).AddImage(new ImageCreationOptions());
+        }).AddImage();
 
         // Initialize toggle option
         var selectable = holder.gameObject.AddComponent<ToggleOption>();
@@ -114,7 +112,7 @@ public class OptionCreator
             Parent = holder,
             Position = new Vector2(-150, 5),
             Size = new Vector2(size, size)
-        }).AddImage(new ImageCreationOptions());
+        }).AddImage();
 
         // Create right arrow image
         var rightArrow = UIModder.Create(new RectCreationOptions()
@@ -123,7 +121,7 @@ public class OptionCreator
             Parent = holder,
             Position = new Vector2(150, 5),
             Size = new Vector2(size, size)
-        }).AddImage(new ImageCreationOptions());
+        }).AddImage();
 
         // Initialize arrow option
         var selectable = holder.gameObject.AddComponent<ArrowOption>();
@@ -187,7 +185,7 @@ public class OptionCreator
             Position = Vector2.zero,
             Pivot = new Vector2(0, 0.5f),
             Size = new Vector2(lineSize, 50)
-        }).AddImage(new ImageCreationOptions());
+        }).AddImage();
 
         // Initialize text option
         var selectable = holder.gameObject.AddComponent<TextOption>();
