@@ -1,5 +1,4 @@
-﻿using Blasphemous.Framework.Menus.Options;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
@@ -7,30 +6,12 @@ namespace Blasphemous.Framework.Menus;
 /// <summary>
 /// The abstract form of an in-game menu
 /// </summary>
-public abstract class ModMenu
+public abstract class ModMenu(string title, int priority)
 {
-    internal string Title { get; }
-    internal int Priority { get; }
+    internal string Title { get; } = title;
+    internal int Priority { get; } = priority;
 
-    /// <summary>
-    /// Creates a new menu with a title and priority
-    /// </summary>
-    public ModMenu(string title, int priority)
-    {
-        Title = title;
-        Priority = priority;
-
-        OptionCreator = new OptionCreator(this);
-    }
-
-    /// <summary>
-    /// Handles clickable settings and menu functionality
-    /// </summary>
     internal MenuComponent UI { get; private set; }
-    /// <summary>
-    /// Handles creating and registering options
-    /// </summary>
-    protected OptionCreator OptionCreator { get; }
 
     /// <summary>
     /// Called when the menus are first opened
@@ -77,10 +58,10 @@ public abstract class ModMenu
     /// <summary>
     /// Adds an event to occur whenever this object is clicked on
     /// </summary>
-    protected internal void AddClickable(RectTransform rect, Action onClick) => UI.AddClickable(rect, onClick, null);
+    public void AddClickable(RectTransform rect, Action onClick) => UI.AddClickable(rect, onClick, null);
 
     /// <summary>
     /// Adds an event to occur whenever this object is clicked on or clicked off
     /// </summary>
-    protected internal void AddClickable(RectTransform rect, Action onClick, Action onUnclick) => UI.AddClickable(rect, onClick, onUnclick);
+    public void AddClickable(RectTransform rect, Action onClick, Action onUnclick) => UI.AddClickable(rect, onClick, onUnclick);
 }
