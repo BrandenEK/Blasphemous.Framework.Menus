@@ -8,6 +8,7 @@ namespace Blasphemous.Framework.Menus.Options;
 /// </summary>
 public class ToggleOption : MonoBehaviour
 {
+    private ModMenu _menu;
     private Image _toggleBox;
 
     private bool _toggled;
@@ -31,14 +32,16 @@ public class ToggleOption : MonoBehaviour
     public void Toggle()
     {
         Toggled = !Toggled;
-        //Main.Randomizer.AudioHandler.PlayEffectUI(UISFX.ChangeSelection);
+
+        _menu.OnOptionsChanged();
     }
 
     /// <summary>
     /// Initializes the toggle option
     /// </summary>
-    public void Initialize(Image toggleBox)
+    public void Initialize(ModMenu menu, Image toggleBox)
     {
+        _menu = menu;
         _toggleBox = toggleBox;
 
         UpdateStatus();

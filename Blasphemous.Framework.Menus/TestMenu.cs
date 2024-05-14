@@ -15,6 +15,13 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
         Main.MenuFramework.LogWarning($"Hiding {Title} menu");
     }
 
+    public override void OnOptionsChanged()
+    {
+        base.OnOptionsChanged();
+
+        Main.MenuFramework.Log("An option was changed!");
+    }
+
     protected internal override void CreateUI(Transform ui)
     {
         if (!hasClickable)

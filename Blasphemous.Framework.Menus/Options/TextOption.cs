@@ -8,6 +8,7 @@ namespace Blasphemous.Framework.Menus.Options;
 /// </summary>
 public class TextOption : MonoBehaviour
 {
+    private ModMenu _menu;
     private Image _underline;
     private Text _text;
 
@@ -59,8 +60,9 @@ public class TextOption : MonoBehaviour
     /// <summary>
     /// Initializes the text option
     /// </summary>
-    public void Initialize(Image underline, Text text, bool numeric, bool allowZero, int maxLength)
+    public void Initialize(ModMenu menu, Image underline, Text text, bool numeric, bool allowZero, int maxLength)
     {
+        _menu = menu;
         _underline = underline;
         _text = text;
 
@@ -118,7 +120,7 @@ public class TextOption : MonoBehaviour
             return;
 
         CurrentValue = _currentValue.Substring(0, _currentValue.Length - 1);
-        //Main.Randomizer.AudioHandler.PlayEffectUI(UISFX.ChangeSelection);
+        _menu.OnOptionsChanged();
     }
 
     void HandleWhitespace(char c)
@@ -127,7 +129,7 @@ public class TextOption : MonoBehaviour
             return;
 
         CurrentValue += c;
-        //Main.Randomizer.AudioHandler.PlayEffectUI(UISFX.ChangeSelection);
+        _menu.OnOptionsChanged();
     }
 
     void HandleNonNumeric(char c)
@@ -136,7 +138,7 @@ public class TextOption : MonoBehaviour
             return;
 
         CurrentValue += c;
-        //Main.Randomizer.AudioHandler.PlayEffectUI(UISFX.ChangeSelection);
+        _menu.OnOptionsChanged();
     }
 
     void HandleZero()
@@ -145,12 +147,12 @@ public class TextOption : MonoBehaviour
             return;
 
         CurrentValue += '0';
-        //Main.Randomizer.AudioHandler.PlayEffectUI(UISFX.ChangeSelection);
+        _menu.OnOptionsChanged();
     }
 
     void HandleNumber(char c)
     {
         CurrentValue += c;
-        //Main.Randomizer.AudioHandler.PlayEffectUI(UISFX.ChangeSelection);
+        _menu.OnOptionsChanged();
     }
 }

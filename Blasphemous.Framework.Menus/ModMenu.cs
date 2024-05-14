@@ -39,6 +39,15 @@ public abstract class ModMenu(string title, int priority)
     public virtual void OnHide() { }
 
     /// <summary>
+    /// Called when one of this menu's options changes its value.
+    /// By default it plays a sound effect
+    /// </summary>
+    public virtual void OnOptionsChanged()
+    {
+        // Play sound effect
+    }
+
+    /// <summary>
     /// Creates the specific UI for this menu if it doesnt already exist
     /// </summary>
     internal void CreateUI(bool isFirst, bool isLast)

@@ -8,6 +8,7 @@ namespace Blasphemous.Framework.Menus.Options;
 /// </summary>
 public class ArrowOption : MonoBehaviour
 {
+    private ModMenu _menu;
     private Text _text;
     private Image _leftArrow;
     private Image _rightArrow;
@@ -38,14 +39,15 @@ public class ArrowOption : MonoBehaviour
             return;
 
         CurrentOption = newOption;
-        //Main.Randomizer.AudioHandler.PlayEffectUI(UISFX.ChangeSelection);
+        _menu.OnOptionsChanged();
     }
 
     /// <summary>
     /// Initializes the arrow option
     /// </summary>
-    public void Initialize(Text optionText, Image leftArrow, Image rightArrow, string[] options)
+    public void Initialize(ModMenu menu, Text optionText, Image leftArrow, Image rightArrow, string[] options)
     {
+        _menu = menu;
         _text = optionText;
         _leftArrow = leftArrow;
         _rightArrow = rightArrow;

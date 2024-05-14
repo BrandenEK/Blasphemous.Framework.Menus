@@ -76,7 +76,7 @@ public class TextCreator(ModMenu menu)
 
         // Initialize text option
         var selectable = holder.gameObject.AddComponent<TextOption>();
-        selectable.Initialize(underline, valueText, numeric, allowZero, max);
+        selectable.Initialize(_menu, underline, valueText, numeric, allowZero, max);
 
         // Add click events
         _menu.AddClickable(underline.rectTransform, () => selectable.SetSelected(true), () => selectable.SetSelected(false));
