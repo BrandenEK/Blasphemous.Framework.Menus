@@ -63,7 +63,16 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
 
         // Texts
 
-        var textCreator = new TextCreator(this);
-        var text = textCreator.CreateOption("test3", ui, new Vector2(500, 0), 36, Color.white, 300, "Test text", false, true, 16);
+        var defaultText = new TextCreator(this);
+        var specialText = new TextCreator(this)
+        {
+            LineSize = 50,
+            TextSize = 20,
+            ElementSpacing = 30,
+            TextColor = Color.black
+        };
+
+        var text1 = defaultText.CreateOption("test3", ui, new Vector2(500, 0), "Test text", false, true, 16);
+        var text2 = specialText.CreateOption("test33", ui, new Vector2(500, 200), "Test text", false, true, 16);
     }
 }

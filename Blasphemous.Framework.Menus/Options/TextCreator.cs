@@ -10,10 +10,21 @@ public class TextCreator(ModMenu menu)
 {
     private readonly ModMenu _menu = menu;
 
+    /// <summary> The pixel size of the underline </summary>
+    public int LineSize { get; set; } = 200;
+    /// <summary> The pixel size of the header and value text </summary>
+    public int TextSize { get; set; } = 36;
+    /// <summary> The color of the header text </summary>
+    public Color TextColor { get; set; } = new Color32(192, 192, 192, 255);
+    /// <summary> The color of the value text </summary>
+    public Color TextColorAlt { get; set; } = new Color32(255, 231, 65, 255);
+    /// <summary> The pixel space in between the header and value text </summary>
+    public int ElementSpacing { get; set; } = 10;
+
     /// <summary>
     /// Adds a text-entry setting to the UI
     /// </summary>
-    public TextOption CreateOption(string name, Transform parent, Vector2 position, int size, Color color, int lineSize, string header, bool numeric, bool allowZero, int max)
+    public TextOption CreateOption(string name, Transform parent, Vector2 position, string header, bool numeric, bool allowZero, int max)
     {
         // Create ui holder
         var holder = UIModder.Create(new RectCreationOptions()
@@ -28,13 +39,13 @@ public class TextCreator(ModMenu menu)
         {
             Name = "header",
             Parent = holder,
-            Position = new Vector2(-10, 0),
+            Position = new Vector2(-ElementSpacing, 0),
             Pivot = new Vector2(1, 0.5f)
         }).AddText(new TextCreationOptions()
         {
             Alignment = TextAnchor.MiddleRight,
-            Color = color,
-            FontSize = size,
+            Color = TextColor,
+            FontSize = TextSize,
             Contents = header
         });
 
@@ -43,24 +54,24 @@ public class TextCreator(ModMenu menu)
         {
             Name = "value",
             Parent = holder,
-            Position = new Vector2(lineSize / 2, 0),
+            Position = new Vector2(LineSize / 2, 0),
             Pivot = new Vector2(0.5f, 0.5f)
         }).AddText(new TextCreationOptions()
         {
             Alignment = TextAnchor.MiddleCenter,
-            Color = Color.yellow,
-            FontSize = size - 5,
+            Color = TextColorAlt,
+            FontSize = TextSize - 5,
             Contents = string.Empty
         });
 
-        // CReate underline image
+        // Create underline image
         var underline = UIModder.Create(new RectCreationOptions()
         {
             Name = "line",
             Parent = holder,
             Position = Vector2.zero,
             Pivot = new Vector2(0, 0.5f),
-            Size = new Vector2(lineSize, 50)
+            Size = new Vector2(LineSize, TextSize)
         }).AddImage();
 
         // Initialize text option
