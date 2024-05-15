@@ -18,9 +18,13 @@ public class MenuFramework : BlasMod
     internal MenuFramework() : base(ModInfo.MOD_ID, ModInfo.MOD_NAME, ModInfo.MOD_AUTHOR, ModInfo.MOD_VERSION) { }
 
     /// <summary>
-    /// Loads and stores all UI icons
+    /// Loads and stores UI icons
     /// </summary>
     public IconLoader IconLoader { get; private set; }
+    /// <summary>
+    /// Plays sound effects
+    /// </summary>
+    public SoundPlayer SoundPlayer { get; private set; }
 
     private MenuCollection _newGameMenus;
     private MenuCollection _loadGameMenus;
@@ -37,6 +41,8 @@ public class MenuFramework : BlasMod
     protected override void OnInitialize()
     {
         IconLoader = new IconLoader(FileHandler);
+        SoundPlayer = new SoundPlayer();
+
         LocalizationHandler.RegisterDefaultLanguage("en");
     }
 
@@ -57,6 +63,16 @@ public class MenuFramework : BlasMod
         if (oldLevel == "MainMenu")
             CurrentMenuCollection.ForceClose();
     }
+
+    /// <summary>
+    /// Finish all new game menus once data has been reset
+    /// </summary>
+    protected override void OnNewGame() => _newGameMenus.DelayedFinish();
+
+    /// <summary>
+    /// Finish all load game menus once data has been reset
+    /// </summary>
+    protected override void OnLoadGame() => _loadGameMenus.DelayedFinish();
 
     /// <summary>
     /// Process submit and cancel input

@@ -60,7 +60,7 @@ public class ToggleCreator(ModMenu menu)
 
         // Initialize toggle option
         var selectable = holder.gameObject.AddComponent<ToggleOption>();
-        selectable.Initialize(boxImage);
+        selectable.Initialize(_menu, boxImage);
 
         // Add click events
         _menu.AddClickable(boxImage.rectTransform, selectable.Toggle);

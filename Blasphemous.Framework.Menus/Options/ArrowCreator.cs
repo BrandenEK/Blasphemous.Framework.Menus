@@ -82,7 +82,7 @@ public class ArrowCreator(ModMenu menu)
 
         // Initialize arrow option
         var selectable = holder.gameObject.AddComponent<ArrowOption>();
-        selectable.Initialize(optionText, leftArrow, rightArrow, options);
+        selectable.Initialize(_menu, optionText, leftArrow, rightArrow, options);
 
         // Add click events
         _menu.AddClickable(leftArrow.rectTransform, () => selectable.ChangeOption(-1));

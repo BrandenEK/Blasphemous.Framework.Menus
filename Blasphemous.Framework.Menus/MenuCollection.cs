@@ -59,6 +59,8 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
     /// </summary>
     public void ShowNextMenu()
     {
+        Main.MenuFramework.SoundPlayer.Play(SoundPlayer.SfxType.EquipItem);
+
         // If there is another menu, move to it
         if (_currentMenu < _menus.Count - 1)
         {
@@ -70,8 +72,6 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
         _menus[_currentMenu].OnHide();
 
         // Otherwise, finish the menu
-        foreach (var menu in _menus)
-            menu.OnFinish();
         onFinish();
     }
 
@@ -80,6 +80,7 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
     /// </summary>
     public void ShowPreviousMenu()
     {
+        Main.MenuFramework.SoundPlayer.Play(SoundPlayer.SfxType.UnequipItem);
         HideMenu(_currentMenu);
 
         // If there is another menu, move to it
@@ -106,5 +107,14 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
         {
             menu.UI?.gameObject.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// Only call the OnFinish method once NewGame or LoadGame has been called
+    /// </summary>
+    public void DelayedFinish()
+    {
+        foreach (var menu in _menus)
+            menu.OnFinish();
     }
 }
