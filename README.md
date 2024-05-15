@@ -37,15 +37,13 @@ internal class TestMenu(string title, int priority) : ModMenu(title, priority)
             Color = new Color(1, 1, 1, 0.5f)
         });
 
-        // Create clickable ui
-        RectTransform click = UIModder.Create(new RectCreationOptions()
+        // Create text box
+        TextCreator text = new(this)
         {
-            Name = "Clickable",
-            Parent = ui,
-        });
-
-        click.AddImage(new ImageCreationOptions() { Color = Color.blue });
-        AddClickable(click, () => Main.MenuFramework.Log("Clicked image"));
+            TextSize = 50,
+            LineSize = 200
+        };
+        text.CreateOption("test", ui, new Vector2(0, 100), "Example text:", true, false, 8);
     }
 }
 ```
