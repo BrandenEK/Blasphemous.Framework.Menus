@@ -4,3 +4,10 @@ btnbgn: Begin
 btncnt: Continue
 btnprv: Previous
 btncnc: Cancel
+
+lang: es
+btnnxt: Siguiente
+btnbgn: Empezar
+btncnt: Continuar
+btnprv: Anterior
+btncnc: Cancelar
