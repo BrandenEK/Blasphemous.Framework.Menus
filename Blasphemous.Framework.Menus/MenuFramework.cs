@@ -65,6 +65,16 @@ public class MenuFramework : BlasMod
     }
 
     /// <summary>
+    /// Finish all new game menus once data has been reset
+    /// </summary>
+    protected override void OnNewGame() => _newGameMenus.DelayedFinish();
+
+    /// <summary>
+    /// Finish all load game menus once data has been reset
+    /// </summary>
+    protected override void OnLoadGame() => _loadGameMenus.DelayedFinish();
+
+    /// <summary>
     /// Process submit and cancel input
     /// </summary>
     protected override void OnUpdate()
