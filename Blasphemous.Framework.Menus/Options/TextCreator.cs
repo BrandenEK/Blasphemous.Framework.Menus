@@ -20,6 +20,8 @@ public class TextCreator(ModMenu menu)
     public Color TextColorAlt { get; set; } = new Color32(255, 231, 65, 255);
     /// <summary> The pixel space in between the header and value text </summary>
     public int ElementSpacing { get; set; } = 10;
+    /// <summary> The pixel space in between the text and underline </summary>
+    public int ElementSpacingAlt { get; set; } = 10;
 
     /// <summary>
     /// Adds a text-entry setting to the UI
@@ -69,7 +71,7 @@ public class TextCreator(ModMenu menu)
         {
             Name = "line",
             Parent = holder,
-            Position = Vector2.zero,
+            Position = new Vector2(0, -ElementSpacingAlt),
             Pivot = new Vector2(0, 0.5f),
             Size = new Vector2(LineSize, TextSize)
         }).AddImage();
