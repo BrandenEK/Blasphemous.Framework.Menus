@@ -7,13 +7,15 @@ namespace Blasphemous.Framework.Menus;
 /// <summary>
 /// The abstract form of an in-game menu
 /// </summary>
-public abstract class ModMenu(string title, int priority)
+public abstract class ModMenu
 {
-    internal string Title { get; } = title;
-    internal int Priority { get; } = priority;
-
     internal BlasMod OwnerMod { get; set; }
     internal MenuComponent UI { get; private set; }
+
+    /// <summary>
+    /// Determines which order menus will be opened
+    /// </summary>
+    protected internal abstract int Priority { get; }
 
     /// <summary>
     /// Called when the menus are first opened
@@ -57,7 +59,7 @@ public abstract class ModMenu(string title, int priority)
         if (UI != null)
             return;
 
-        UI = Main.MenuFramework.CreateBaseMenu(OwnerMod.Name + Title, isFirst, isLast);
+        UI = Main.MenuFramework.CreateBaseMenu(OwnerMod.Name, isFirst, isLast);
         CreateUI(UI.transform.Find("Main Section"));
     }
 
