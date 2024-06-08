@@ -12,3 +12,4 @@ btnbgn: Empezar
 btncnt: Continuar
 btnprv: Anterior
 btncnc: Cancelar
+title: Opciones
