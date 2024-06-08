@@ -4,6 +4,7 @@ btnbgn: Begin
 btncnt: Continue
 btnprv: Previous
 btncnc: Cancel
+title: Settings
 
 lang: es
 btnnxt: Siguiente

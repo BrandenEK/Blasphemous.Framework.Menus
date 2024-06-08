@@ -59,7 +59,8 @@ public abstract class ModMenu
         if (UI != null)
             return;
 
-        UI = Main.MenuFramework.CreateBaseMenu(OwnerMod.Name, isFirst, isLast);
+        string title = $"{OwnerMod.Name} {Main.MenuFramework.LocalizationHandler.Localize("title")}";
+        UI = Main.MenuFramework.CreateBaseMenu(title, isFirst, isLast);
         CreateUI(UI.transform.Find("Main Section"));
     }
 
