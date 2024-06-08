@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blasphemous.ModdingAPI;
+using System;
 using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
@@ -11,6 +12,7 @@ public abstract class ModMenu(string title, int priority)
     internal string Title { get; } = title;
     internal int Priority { get; } = priority;
 
+    internal BlasMod OwnerMod { get; set; }
     internal MenuComponent UI { get; private set; }
 
     /// <summary>
@@ -55,7 +57,7 @@ public abstract class ModMenu(string title, int priority)
         if (UI != null)
             return;
 
-        UI = Main.MenuFramework.CreateBaseMenu(Title, isFirst, isLast);
+        UI = Main.MenuFramework.CreateBaseMenu(OwnerMod.Name + Title, isFirst, isLast);
         CreateUI(UI.transform.Find("Main Section"));
     }
 
