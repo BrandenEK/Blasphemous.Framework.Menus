@@ -32,24 +32,22 @@
       <PluginDll Include="$(TargetPath)" />
       <Resources Include="$(SolutionDir)\resources\**\*.*" />
     </ItemGroup>
-
-    <!-- Copy plugin & resources to dev folder -->
+    
+    <!-- Get export directories -->
     <PropertyGroup>
       <DevFolder>C:\Program Files (x86)\Steam\steamapps\common\Blasphemous\Modding\</DevFolder>
+      <PublishFolder>$(SolutionDir)\publish\$(TargetName)</PublishFolder>
     </PropertyGroup>
-    
+
+    <!-- Export to dev folder -->
     <Copy SourceFiles="@(Resources)" DestinationFolder="$(DevFolder)\%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(PluginDll)" DestinationFolder="$(DevFolder)\plugins" SkipUnchangedFiles="true" />
-
-    <!-- Copy plugin & resources to export folder -->
-    <PropertyGroup>
-      <ExportFolder>$(SolutionDir)\publish\$(TargetName)</ExportFolder>
-    </PropertyGroup>
     
-    <RemoveDir Directories="$(ExportFolder)" />
-    <Copy SourceFiles="@(Resources)" DestinationFolder="$(ExportFolder)\%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="@(PluginDll)" DestinationFolder="$(ExportFolder)\plugins" SkipUnchangedFiles="true" />
-    <ZipDirectory SourceDirectory="$(ExportFolder)" DestinationFile="$(ExportFolder)\..\$(TargetName).zip" Overwrite="true" />
+    <!-- Export to publish folder -->
+    <RemoveDir Directories="$(PublishFolder)" />
+    <Copy SourceFiles="@(Resources)" DestinationFolder="$(PublishFolder)\%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(PluginDll)" DestinationFolder="$(PublishFolder)\plugins" SkipUnchangedFiles="true" />
+    <ZipDirectory SourceDirectory="$(PublishFolder)" DestinationFile="$(PublishFolder)\..\$(TargetName).zip" Overwrite="true" />
 
   </Target>
 
