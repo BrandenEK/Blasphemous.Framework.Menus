@@ -3,16 +3,18 @@ using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
 
-internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu(title, priority)
+internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
 {
+    protected internal override int Priority { get; } = priority;
+
     public override void OnShow()
     {
-        Main.MenuFramework.LogWarning($"Showing {Title} menu");
+        Main.MenuFramework.LogWarning($"Showing {title} menu");
     }
 
     public override void OnHide()
     {
-        Main.MenuFramework.LogWarning($"Hiding {Title} menu");
+        Main.MenuFramework.LogWarning($"Hiding {title} menu");
     }
 
     public override void OnOptionsChanged()

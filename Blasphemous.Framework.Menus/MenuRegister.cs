@@ -18,8 +18,9 @@ public static class MenuRegister
         if (provider == null)
             return;
 
-        _newMenus.Add(menu);
         Main.MenuFramework.Log($"Registered new game menu: {menu.GetType().Name}");
+        menu.OwnerMod = provider.RegisteringMod;
+        _newMenus.Add(menu);
     }
 
     /// <summary> Registers a menu to appear before loading an existing game </summary>
@@ -28,7 +29,8 @@ public static class MenuRegister
         if (provider == null)
             return;
 
-        _loadMenus.Add(menu);
         Main.MenuFramework.Log($"Registered load game menu: {menu.GetType().Name}");
+        menu.OwnerMod = provider.RegisteringMod;
+        _loadMenus.Add(menu);
     }
 }
