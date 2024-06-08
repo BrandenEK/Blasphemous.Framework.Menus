@@ -44,8 +44,8 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
         var defaultArrow = new ArrowCreator(this);
         var specialArrow = new ArrowCreator(this)
         {
-            ArrowSize = 55,
-            TextSize = 55,
+            ArrowSize = 54,
+            TextSize = 54,
             ElementSpacing = 180,
             TextColorAlt = Color.cyan
         };
