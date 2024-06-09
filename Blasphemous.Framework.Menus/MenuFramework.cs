@@ -1,7 +1,6 @@
 ﻿using Blasphemous.Framework.Menus.Patches;
 using Blasphemous.Framework.UI;
 using Blasphemous.ModdingAPI;
-using Blasphemous.ModdingAPI.Input;
 using Framework.Managers;
 using Gameplay.UI.Others;
 using Gameplay.UI.Others.MenuLogic;
