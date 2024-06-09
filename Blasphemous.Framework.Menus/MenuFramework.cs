@@ -2,6 +2,7 @@
 using Blasphemous.Framework.UI;
 using Blasphemous.ModdingAPI;
 using Blasphemous.ModdingAPI.Input;
+using Framework.Managers;
 using Gameplay.UI.Others;
 using Gameplay.UI.Others.MenuLogic;
 using I2.Loc;
@@ -108,6 +109,9 @@ public class MenuFramework : BlasMod
 
         if (CurrentMenuCollection.IsEmpty)
             return true;
+
+        if (_isContinue)
+            Core.Persistence.LoadGameWithOutRespawn(slot);
 
         StartMenu();
         return false;
