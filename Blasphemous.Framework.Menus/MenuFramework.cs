@@ -83,6 +83,8 @@ public class MenuFramework : BlasMod
         if (!IsMenuActive)
             return;
 
+        CurrentMenuCollection.CurrentMenu.OnUpdate();
+
         if (_enterNextFrame)
         {
             _enterNextFrame = false;

@@ -43,6 +43,11 @@ public abstract class ModMenu
     public virtual void OnHide() { }
 
     /// <summary>
+    /// Called every frame while this menu is active
+    /// </summary>
+    public virtual void OnUpdate() { }
+
+    /// <summary>
     /// Called when one of this menu's options changes its value.
     /// By default it plays a sound effect
     /// </summary>

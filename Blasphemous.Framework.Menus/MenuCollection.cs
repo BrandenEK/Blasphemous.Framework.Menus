@@ -14,6 +14,7 @@ internal class MenuCollection(IEnumerable<ModMenu> menus, Action onFinish, Actio
 
     public bool IsEmpty => _menus.Count == 0;
     public bool IsActive => _currentMenu != -1;
+    public ModMenu CurrentMenu => _menus[_currentMenu];
 
     /// <summary>
     /// Activates a specific menu
