@@ -1,4 +1,5 @@
 ﻿using Blasphemous.ModdingAPI;
+using Blasphemous.ModdingAPI.Input;
 using System;
 using UnityEngine;
 
@@ -41,6 +42,22 @@ public abstract class ModMenu
     /// Called when this specific menu is closed
     /// </summary>
     public virtual void OnHide() { }
+
+    /// <summary>
+    /// Called every frame while this menu is active.
+    /// By default it checks for enter/cancel input
+    /// </summary>
+    public virtual void OnUpdate()
+    {
+        if (Main.MenuFramework.InputHandler.GetButtonDown(ButtonCode.UISubmit))
+        {
+            Main.MenuFramework.ShowNextMenu();
+        }
+        else if (Main.MenuFramework.InputHandler.GetButtonDown(ButtonCode.UICancel))
+        {
+            Main.MenuFramework.ShowPreviousMenu();
+        }
+    }
 
     /// <summary>
     /// Called when one of this menu's options changes its value.

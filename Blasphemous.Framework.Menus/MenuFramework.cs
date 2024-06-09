@@ -1,7 +1,7 @@
 ﻿using Blasphemous.Framework.Menus.Patches;
 using Blasphemous.Framework.UI;
 using Blasphemous.ModdingAPI;
-using Blasphemous.ModdingAPI.Input;
+using Framework.Managers;
 using Gameplay.UI.Others;
 using Gameplay.UI.Others.MenuLogic;
 using I2.Loc;
@@ -75,7 +75,23 @@ public class MenuFramework : BlasMod
     protected override void OnLoadGame() => _loadGameMenus.DelayedFinish();
 
     /// <summary>
-    /// Process submit and cancel input
+    /// Opens the next menu in the queue, or starts the game
+    /// </summary>
+    public void ShowNextMenu()
+    {
+        _enterNextFrame = true;
+    }
+
+    /// <summary>
+    /// Opens the previous menu in the queue, or returns to the main menu
+    /// </summary>
+    public void ShowPreviousMenu()
+    {
+        CurrentMenuCollection.ShowPreviousMenu();
+    }
+
+    /// <summary>
+    /// Updates the current menu
     /// </summary>
     protected override void OnUpdate()
     {
@@ -88,14 +104,7 @@ public class MenuFramework : BlasMod
             CurrentMenuCollection.ShowNextMenu();
         }
 
-        if (InputHandler.GetButtonDown(ButtonCode.UISubmit))
-        {
-            _enterNextFrame = true;
-        }
-        else if (InputHandler.GetButtonDown(ButtonCode.UICancel))
-        {
-            CurrentMenuCollection.ShowPreviousMenu();
-        }
+        CurrentMenuCollection.CurrentMenu.OnUpdate();
     }
 
     /// <summary>
@@ -108,6 +117,9 @@ public class MenuFramework : BlasMod
 
         if (CurrentMenuCollection.IsEmpty)
             return true;
+
+        if (_isContinue)
+            Core.Persistence.LoadGameWithOutRespawn(slot);
 
         StartMenu();
         return false;
