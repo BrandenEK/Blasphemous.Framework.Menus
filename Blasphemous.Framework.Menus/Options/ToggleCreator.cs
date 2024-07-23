@@ -39,7 +39,7 @@ public class ToggleCreator(ModMenu menu)
             Parent = holder,
             Position = new Vector2(ElementSpacing, 0),
             Pivot = new Vector2(0, 0.5f),
-            Size = new Vector2(100, BoxSize)
+            Size = new Vector2(100, BoxSize * 2)
         }).AddText(new TextCreationOptions()
         {
             Alignment = TextAnchor.MiddleLeft,
