@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Blasphemous.Framework.Menus.Extensions;
 
@@ -12,9 +11,7 @@ internal static class MenuExtensions
 
         //Camera cam = Object.FindObjectsOfType<Camera>().First(x => x.name == "UICamera");
 
-        Vector2 position = rect.position; // Doesn't work on different resolutions
-        position = new Vector2(position.x * scaling.x, position.y * scaling.y + scaling.z);
-
+        var position = new Vector2(rect.position.x * scaling.x, rect.position.y * scaling.y + scaling.z);
         var size = new Vector2(rect.rect.width * scaling.x, rect.rect.height * scaling.y);
 
         float leftBound = position.x + size.x * -rect.pivot.x;
@@ -22,6 +19,7 @@ internal static class MenuExtensions
         float lowerBound = position.y + size.y * -rect.pivot.y;
         float upperBound = position.y + size.y * (1 - rect.pivot.y);
 
+        point = new Vector2(point.x * scaling.x, point.y * scaling.y);
         return point.x >= leftBound && point.x <= rightBound && point.y >= lowerBound && point.y <= upperBound;
     }
 }

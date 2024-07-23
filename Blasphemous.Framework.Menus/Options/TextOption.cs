@@ -79,7 +79,9 @@ public class TextOption : MonoBehaviour
         _underline.sprite = _selected
             ? Main.MenuFramework.IconLoader.TextOn
             : Main.MenuFramework.IconLoader.TextOff;
-        _text.text = _currentValue.Length > 0 ? _currentValue : "---";
+        _text.text = _currentValue.Length > 0
+            ? _currentValue
+            : _selected ? string.Empty : "---";
     }
 
     private void ProcessCharacter(char c)
