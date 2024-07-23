@@ -6,6 +6,7 @@
 
 ## Usage
 - Allows other mods to declare interactable menus when starting a new game or loading an existing one
+- Most likely doesn't work on non 16:9 resolutions
 
 ## Development
 Example menu:
