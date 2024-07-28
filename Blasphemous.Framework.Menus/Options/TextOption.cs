@@ -18,6 +18,7 @@ public class TextOption : MonoBehaviour
 
     private string _currentValue = string.Empty;
     private bool _selected;
+    private bool _tabNextFrame;
 
     /// <summary>
     /// The current string value of the option
@@ -51,9 +52,15 @@ public class TextOption : MonoBehaviour
         if (!_selected)
             return;
 
+        if (_tabNextFrame)
+        {
+            _tabNextFrame = false;
+            TabToNextText();
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            TabToNextText();
+            _tabNextFrame = true;
             return;
         }
 
