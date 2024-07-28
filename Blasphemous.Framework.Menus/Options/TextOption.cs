@@ -51,10 +51,23 @@ public class TextOption : MonoBehaviour
         if (!_selected)
             return;
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            TabToNextText();
+            return;
+        }
+
         foreach (char c in Input.inputString)
         {
             ProcessCharacter(c);
         }
+    }
+
+    private void TabToNextText()
+    {
+        Main.MenuFramework.LogWarning("Attempting to tab to next text option");
+        foreach (var text in FindObjectsOfType<TextOption>())
+            Main.MenuFramework.LogError(text.name);
     }
 
     /// <summary>
