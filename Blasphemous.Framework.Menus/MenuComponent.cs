@@ -81,7 +81,23 @@ internal class MenuComponent : MonoBehaviour
     /// </summary>
     private void HandleTab()
     {
-        // If clicked setting is not null and allows tab, find the next one and unclick/click
+        if (_clickedSetting == null || !_clickedSetting.AllowTab)
+            return;
+
+        int currIdx = _clickables.IndexOf(_clickedSetting);
+        DeselectCurrentOption();
+
+        while (true)
+        {
+            if (++currIdx >= _clickables.Count)
+                currIdx = 0;
+
+            if (!_clickables[currIdx].AllowTab)
+                continue;
+
+            SelectOption(_clickables[currIdx]);
+            break;
+        }
     }
 
     public void AddClickable(RectTransform rect, bool allowTab, System.Action onClick, System.Action onUnclick)
