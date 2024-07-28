@@ -66,8 +66,23 @@ public class TextOption : MonoBehaviour
     private void TabToNextText()
     {
         Main.MenuFramework.LogWarning("Attempting to tab to next text option");
-        foreach (var text in FindObjectsOfType<TextOption>())
-            Main.MenuFramework.LogError(text.name);
+        var texts = FindObjectsOfType<TextOption>();
+
+        // If only one text option, do nothing
+        if (texts.Length == 0)
+            return;
+
+        for (int i = texts.Length - 1; i >= 1; i--)
+        {
+            // If this is a different text option, keep going
+            if (texts[i] != this)
+                continue;
+
+            // Deselect this one and select the next one
+            SetSelected(false);
+            texts[i - 1].SetSelected(true);
+            Main.MenuFramework.Log($"Tabbed to text {texts[i - 1].name}");
+        }
     }
 
     /// <summary>
