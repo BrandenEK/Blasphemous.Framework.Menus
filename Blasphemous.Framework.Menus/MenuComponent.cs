@@ -37,24 +37,51 @@ internal class MenuComponent : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            // If clicked setting is not null and allows tab, find the next one and unclick/click
+            HandleTab();
         }
     }
 
-    private void HandleClick()
+    /// <summary>
+    /// Marks the option as selected
+    /// </summary>
+    private void SelectOption(Clickable clickable)
+    {
+        _clickedSetting = clickable;
+        clickable.OnClick();
+    }
+
+    /// <summary>
+    /// Marks the current option as unselected
+    /// </summary>
+    private void DeselectCurrentOption()
     {
         _clickedSetting?.OnUnclick();
         _clickedSetting = null;
+    }
 
-        foreach (var click in _clickables)
+    /// <summary>
+    /// Deselect the current option, the select one if the cursor is hovering over it
+    /// </summary>
+    private void HandleClick()
+    {
+        DeselectCurrentOption();
+
+        foreach (var clickable in _clickables)
         {
-            if (click.Rect.OverlapsPoint(Input.mousePosition))
+            if (clickable.Rect.OverlapsPoint(Input.mousePosition))
             {
-                _clickedSetting = click;
-                click.OnClick();
+                SelectOption(clickable);
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// Deselect the current tabable option, then select the next tabable one
+    /// </summary>
+    private void HandleTab()
+    {
+        // If clicked setting is not null and allows tab, find the next one and unclick/click
     }
 
     public void AddClickable(RectTransform rect, bool allowTab, System.Action onClick, System.Action onUnclick)
