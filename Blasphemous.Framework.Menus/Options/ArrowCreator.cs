@@ -85,8 +85,8 @@ public class ArrowCreator(ModMenu menu)
         selectable.Initialize(_menu, optionText, leftArrow, rightArrow, options);
 
         // Add click events
-        _menu.AddClickable(leftArrow.rectTransform, () => selectable.ChangeOption(-1));
-        _menu.AddClickable(rightArrow.rectTransform, () => selectable.ChangeOption(1));
+        _menu.AddClickable(leftArrow.rectTransform, false, () => selectable.ChangeOption(-1));
+        _menu.AddClickable(rightArrow.rectTransform, false, () => selectable.ChangeOption(1));
 
         return selectable;
     }

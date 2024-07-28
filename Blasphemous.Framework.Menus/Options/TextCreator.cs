@@ -81,7 +81,7 @@ public class TextCreator(ModMenu menu)
         selectable.Initialize(_menu, underline, valueText, numeric, allowZero, max);
 
         // Add click events
-        _menu.AddClickable(underline.rectTransform, () => selectable.SetSelected(true), () => selectable.SetSelected(false));
+        _menu.AddClickable(underline.rectTransform, true, () => selectable.SetSelected(true), () => selectable.SetSelected(false));
 
         return selectable;
     }

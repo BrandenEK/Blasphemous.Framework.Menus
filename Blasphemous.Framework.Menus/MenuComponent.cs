@@ -34,35 +34,84 @@ internal class MenuComponent : MonoBehaviour
         {
             HandleClick();
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            HandleTab();
+        }
     }
 
-    private void HandleClick()
+    /// <summary>
+    /// Marks the option as selected
+    /// </summary>
+    private void SelectOption(Clickable clickable)
+    {
+        _clickedSetting = clickable;
+        clickable.OnClick();
+    }
+
+    /// <summary>
+    /// Marks the current option as unselected
+    /// </summary>
+    private void DeselectCurrentOption()
     {
         _clickedSetting?.OnUnclick();
         _clickedSetting = null;
+    }
 
-        foreach (var click in _clickables)
+    /// <summary>
+    /// Deselect the current option, the select one if the cursor is hovering over it
+    /// </summary>
+    private void HandleClick()
+    {
+        DeselectCurrentOption();
+
+        foreach (var clickable in _clickables)
         {
-            if (click.Rect.OverlapsPoint(Input.mousePosition))
+            if (clickable.Rect.OverlapsPoint(Input.mousePosition))
             {
-                _clickedSetting = click;
-                click.OnClick();
+                SelectOption(clickable);
                 break;
             }
         }
     }
 
-    public void AddClickable(RectTransform rect, System.Action onClick, System.Action onUnclick)
+    /// <summary>
+    /// Deselect the current tabable option, then select the next tabable one
+    /// </summary>
+    private void HandleTab()
     {
-        _clickables.Add(new Clickable(rect, onClick, onUnclick));
+        if (_clickedSetting == null || !_clickedSetting.AllowTab)
+            return;
+
+        int currIdx = _clickables.IndexOf(_clickedSetting);
+        DeselectCurrentOption();
+
+        while (true)
+        {
+            if (++currIdx >= _clickables.Count)
+                currIdx = 0;
+
+            if (!_clickables[currIdx].AllowTab)
+                continue;
+
+            SelectOption(_clickables[currIdx]);
+            break;
+        }
     }
 
-    class Clickable(RectTransform rect, System.Action onClick, System.Action onUnclick)
+    public void AddClickable(RectTransform rect, bool allowTab, System.Action onClick, System.Action onUnclick)
+    {
+        _clickables.Add(new Clickable(rect, allowTab, onClick, onUnclick));
+    }
+
+    class Clickable(RectTransform rect, bool allowTab, System.Action onClick, System.Action onUnclick)
     {
         private readonly System.Action _onClick = onClick;
         private readonly System.Action _onUnclick = onUnclick;
 
         public RectTransform Rect { get; } = rect;
+        public bool AllowTab { get; } = allowTab;
 
         internal void OnClick() => _onClick?.Invoke();
 
