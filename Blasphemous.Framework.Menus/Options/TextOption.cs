@@ -52,17 +52,17 @@ public class TextOption : MonoBehaviour
         if (!_selected)
             return;
 
-        if (_tabNextFrame)
-        {
-            _tabNextFrame = false;
-            TabToNextText();
-        }
+        //if (_tabNextFrame)
+        //{
+        //    _tabNextFrame = false;
+        //    TabToNextText();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            _tabNextFrame = true;
-            return;
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    _tabNextFrame = true;
+        //    return;
+        //}
 
         foreach (char c in Input.inputString)
         {

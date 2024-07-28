@@ -34,6 +34,11 @@ internal class MenuComponent : MonoBehaviour
         {
             HandleClick();
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            // If clicked setting is not null and allows tab, find the next one and unclick/click
+        }
     }
 
     private void HandleClick()
@@ -52,17 +57,18 @@ internal class MenuComponent : MonoBehaviour
         }
     }
 
-    public void AddClickable(RectTransform rect, System.Action onClick, System.Action onUnclick)
+    public void AddClickable(RectTransform rect, bool allowTab, System.Action onClick, System.Action onUnclick)
     {
-        _clickables.Add(new Clickable(rect, onClick, onUnclick));
+        _clickables.Add(new Clickable(rect, allowTab, onClick, onUnclick));
     }
 
-    class Clickable(RectTransform rect, System.Action onClick, System.Action onUnclick)
+    class Clickable(RectTransform rect, bool allowTab, System.Action onClick, System.Action onUnclick)
     {
         private readonly System.Action _onClick = onClick;
         private readonly System.Action _onUnclick = onUnclick;
 
         public RectTransform Rect { get; } = rect;
+        public bool AllowTab { get; } = allowTab;
 
         internal void OnClick() => _onClick?.Invoke();
 

@@ -89,10 +89,10 @@ public abstract class ModMenu
     /// <summary>
     /// Adds an event to occur whenever this object is clicked on
     /// </summary>
-    public void AddClickable(RectTransform rect, Action onClick) => UI.AddClickable(rect, onClick, null);
+    public void AddClickable(RectTransform rect, bool allowTab, Action onClick) => UI.AddClickable(rect, allowTab, onClick, null);
 
     /// <summary>
     /// Adds an event to occur whenever this object is clicked on or clicked off
     /// </summary>
-    public void AddClickable(RectTransform rect, Action onClick, Action onUnclick) => UI.AddClickable(rect, onClick, onUnclick);
+    public void AddClickable(RectTransform rect, bool allowTab, Action onClick, Action onUnclick) => UI.AddClickable(rect, allowTab, onClick, onUnclick);
 }

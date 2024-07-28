@@ -63,7 +63,7 @@ public class ToggleCreator(ModMenu menu)
         selectable.Initialize(_menu, boxImage);
 
         // Add click events
-        _menu.AddClickable(boxImage.rectTransform, selectable.Toggle);
+        _menu.AddClickable(boxImage.rectTransform, false, selectable.Toggle);
 
         return selectable;
     }
