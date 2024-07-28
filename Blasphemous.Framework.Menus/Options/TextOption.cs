@@ -18,7 +18,6 @@ public class TextOption : MonoBehaviour
 
     private string _currentValue = string.Empty;
     private bool _selected;
-    private bool _tabNextFrame;
 
     /// <summary>
     /// The current string value of the option
@@ -52,43 +51,9 @@ public class TextOption : MonoBehaviour
         if (!_selected)
             return;
 
-        //if (_tabNextFrame)
-        //{
-        //    _tabNextFrame = false;
-        //    TabToNextText();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Tab))
-        //{
-        //    _tabNextFrame = true;
-        //    return;
-        //}
-
         foreach (char c in Input.inputString)
         {
             ProcessCharacter(c);
-        }
-    }
-
-    private void TabToNextText()
-    {
-        Main.MenuFramework.LogWarning("Attempting to tab to next text option");
-        var texts = FindObjectsOfType<TextOption>();
-
-        // If only one text option, do nothing
-        if (texts.Length == 0)
-            return;
-
-        for (int i = texts.Length - 1; i >= 1; i--)
-        {
-            // If this is a different text option, keep going
-            if (texts[i] != this)
-                continue;
-
-            // Deselect this one and select the next one
-            SetSelected(false);
-            texts[i - 1].SetSelected(true);
-            Main.MenuFramework.Log($"Tabbed to text {texts[i - 1].name}");
         }
     }
 
