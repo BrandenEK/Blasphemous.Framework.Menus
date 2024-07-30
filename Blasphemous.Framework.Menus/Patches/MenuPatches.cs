@@ -11,8 +11,14 @@ namespace Blasphemous.Framework.Menus.Patches;
 [HarmonyPatch(typeof(SelectSaveSlots), nameof(SelectSaveSlots.OnAcceptSlots))]
 class Menu_Play_Patch
 {
-    public static bool Prefix(int idxSlot, List<SaveSlot> ___slots)
+    public static bool Prefix(int idxSlot, List<SaveSlot> ___slots, bool __runOriginal)
     {
+        if (!__runOriginal)
+        {
+            Main.MenuFramework.Log("Something else skipped game start, so skip opening menus");
+            return false;
+        }
+
         return StartGameFlag || Main.MenuFramework.TryStartGame(idxSlot, !___slots[idxSlot].IsEmpty);
     }
 
