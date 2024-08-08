@@ -139,10 +139,10 @@ public class MenuFramework : BlasMod
     /// </summary>
     private void OnFinishMenu()
     {
-        Menu_Play_Patch.StartGameFlag = true;
+        SelectSaveSlots_OnAcceptSlots_Patch.StartGameFlag = true;
         SlotsMenu.gameObject.SetActive(true);
         SlotsMenu.OnAcceptSlots(_currentSlot);
-        Menu_Play_Patch.StartGameFlag = false;
+        SelectSaveSlots_OnAcceptSlots_Patch.StartGameFlag = false;
     }
 
     /// <summary>

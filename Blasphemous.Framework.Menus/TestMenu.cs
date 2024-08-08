@@ -1,4 +1,5 @@
 ﻿using Blasphemous.Framework.Menus.Options;
+using Blasphemous.ModdingAPI;
 using UnityEngine;
 
 namespace Blasphemous.Framework.Menus;
@@ -9,19 +10,19 @@ internal class TestMenu(string title, int priority, bool hasClickable) : ModMenu
 
     public override void OnShow()
     {
-        Main.MenuFramework.LogWarning($"Showing {title} menu");
+        ModLog.Warn($"Showing {title} menu");
     }
 
     public override void OnHide()
     {
-        Main.MenuFramework.LogWarning($"Hiding {title} menu");
+        ModLog.Warn($"Hiding {title} menu");
     }
 
     public override void OnOptionsChanged()
     {
         base.OnOptionsChanged();
 
-        Main.MenuFramework.Log("An option was changed!");
+        ModLog.Info("An option was changed!");
     }
 
     protected internal override void CreateUI(Transform ui)

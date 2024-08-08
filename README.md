@@ -48,3 +48,7 @@ internal class TestMenu(string title, int priority) : ModMenu(title, priority)
     }
 }
 ```
+
+## Installation
+This mod is available for download through the [Blasphemous Mod Installer](https://github.com/BrandenEK/Blasphemous.Modding.Installer)
+- Required dependencies: Modding API, UI Framework
