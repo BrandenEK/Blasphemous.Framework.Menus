@@ -1,4 +1,5 @@
-﻿using Gameplay.UI.Others.MenuLogic;
+﻿using Blasphemous.ModdingAPI;
+using Gameplay.UI.Others.MenuLogic;
 using Gameplay.UI.Widgets;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ namespace Blasphemous.Framework.Menus.Patches;
 /// Shows the menu, or starts game if no menus or accepted
 /// </summary>
 [HarmonyPatch(typeof(SelectSaveSlots), nameof(SelectSaveSlots.OnAcceptSlots))]
-class Menu_Play_Patch
+class SelectSaveSlots_OnAcceptSlots_Patch
 {
     public static bool Prefix(int idxSlot, List<SaveSlot> ___slots, bool __runOriginal)
     {
         if (!__runOriginal)
         {
-            Main.MenuFramework.Log("Something else skipped game start, so skip opening menus");
+            ModLog.Info("Something else skipped game start, so skip opening menus");
             return false;
         }
 

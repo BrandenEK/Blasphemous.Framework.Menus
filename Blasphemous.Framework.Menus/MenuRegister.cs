@@ -18,7 +18,7 @@ public static class MenuRegister
         if (provider == null)
             return;
 
-        Main.MenuFramework.Log($"Registered new game menu: {menu.GetType().Name}");
+        ModLog.Info($"Registered new game menu: {menu.GetType().Name}");
         menu.OwnerMod = provider.RegisteringMod;
         _newMenus.Add(menu);
     }
@@ -29,7 +29,7 @@ public static class MenuRegister
         if (provider == null)
             return;
 
-        Main.MenuFramework.Log($"Registered load game menu: {menu.GetType().Name}");
+        ModLog.Info($"Registered load game menu: {menu.GetType().Name}");
         menu.OwnerMod = provider.RegisteringMod;
         _loadMenus.Add(menu);
     }

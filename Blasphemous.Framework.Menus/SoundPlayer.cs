@@ -20,9 +20,13 @@ public class SoundPlayer
     /// </summary>
     public enum SfxType
     {
+        /// <summary> SFX used on input submit </summary>
         EquipItem = 0,
+        /// <summary> SFX used on input cancel </summary>
         UnequipItem = 1,
+        /// <summary> SFX used on selection change </summary>
         ChangeSelection = 2,
+        /// <summary> SFX used on scene change </summary>
         FadeToWhite = 3,
     }
 }
