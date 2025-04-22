@@ -12,5 +12,7 @@
 - Full documentation can be found [here](DEVELOPING.md)
 
 ## Installation
-This mod is available for download through the [Blasphemous Mod Installer](https://github.com/BrandenEK/Blasphemous.Modding.Installer)
-- Required dependencies: Modding API, UI Framework
+This mod is available for download through the [Blasphemous Mod Installer](https://github.com/BrandenEK/Blasphemous.Modding.Installer) <br>
+Required dependencies:
+- [Modding API](https://github.com/BrandenEK/Blasphemous.ModdingAPI)
+- [UI Framework](https://github.com/BrandenEK/Blasphemous.Framework.UI)
