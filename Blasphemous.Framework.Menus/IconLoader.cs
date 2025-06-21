@@ -52,7 +52,11 @@ public class IconLoader
         ArrowRightOff = arrow[3];
 
         // Load text icons
-        file.LoadDataAsFixedSpritesheet("text.png", new Vector2(141, 54), out Sprite[] text);
+        file.LoadDataAsFixedSpritesheet("text.png", new Vector2(141, 54), out Sprite[] text, new SpriteImportOptions()
+        {
+            Border = new Vector4(33, 21, 33, 0),
+            PixelsPerUnit = 96,
+        });
         TextOn = text[0];
         TextOff = text[1];
     }
