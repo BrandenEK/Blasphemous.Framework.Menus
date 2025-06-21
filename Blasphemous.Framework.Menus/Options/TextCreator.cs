@@ -73,8 +73,9 @@ public class TextCreator(ModMenu menu)
             Parent = holder,
             Position = new Vector2(0, -ElementSpacingAlt),
             Pivot = new Vector2(0, 0.5f),
-            Size = new Vector2(LineSize, TextSize)
+            Size = new Vector2((LineSize / 3) * 3, TextSize)
         }).AddImage();
+        underline.type = UnityEngine.UI.Image.Type.Tiled;
 
         // Initialize text option
         var selectable = holder.gameObject.AddComponent<TextOption>();
