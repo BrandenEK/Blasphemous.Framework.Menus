@@ -39,7 +39,7 @@ public class ArrowOption : MonoBehaviour
             return;
 
         CurrentOption = newOption;
-        _menu.OnOptionsChanged();
+        _menu.OnOptionsChanged(name);
     }
 
     /// <summary>
