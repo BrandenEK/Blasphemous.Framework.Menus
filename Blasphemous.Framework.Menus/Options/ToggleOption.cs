@@ -50,7 +50,7 @@ public class ToggleOption : MonoBehaviour
 
         Toggled = !Toggled;
 
-        _menu.OnOptionsChanged();
+        _menu.OnOptionsChanged(name);
     }
 
     /// <summary>
