@@ -63,21 +63,9 @@ public abstract class ModMenu
     /// Called when one of this menu's options changes its value.
     /// By default it plays a sound effect
     /// </summary>
-    [System.Obsolete("Use the overload with the option name instead")]
-    public virtual void OnOptionsChanged()
-    {
-    }
-
-    /// <summary>
-    /// Called when one of this menu's options changes its value.
-    /// By default it plays a sound effect
-    /// </summary>
     public virtual void OnOptionsChanged(string option)
     {
         Main.MenuFramework.SoundPlayer.Play(SoundPlayer.SfxType.ChangeSelection);
-#pragma warning disable CS0618 // Type or member is obsolete
-        OnOptionsChanged();
-#pragma warning restore CS0618 // Type or member is obsolete
     }
 
     /// <summary>
