@@ -222,18 +222,15 @@ public class MenuFramework : BlasMod
         }
     }
 
-#if DEBUG
     /// <summary>
     /// Register test menus
     /// </summary>
     protected override void OnRegisterServices(ModServiceProvider provider)
     {
-        provider.RegisterNewGameMenu(new TestMenu("Testing number 1", 10, true));
-        provider.RegisterNewGameMenu(new TestMenu("Testing number 2", 21, true));
-
-        provider.RegisterLoadGameMenu(new TestMenu("Loading game...", 50, false));
+        //provider.RegisterNewGameMenu(new TestMenu("Testing number 1", 10, true));
+        //provider.RegisterNewGameMenu(new TestMenu("Testing number 2", 21, true));
+        //provider.RegisterLoadGameMenu(new TestMenu("Loading game...", 50, false));
     }
-#endif
 
     private SelectSaveSlots x_slotsMenu;
     private SelectSaveSlots SlotsMenu
