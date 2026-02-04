@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Blasphemous.Framework.Menus.Extensions;
 using UnityEngine;
 
@@ -39,6 +40,19 @@ internal class MenuComponent : MonoBehaviour
         {
             HandleTab();
         }
+    }
+
+    /// <summary>
+    /// Marks the first tabbable option as selected
+    /// </summary>
+    public void SelectFirstOption()
+    {
+        DeselectCurrentOption();
+
+        Clickable first = _clickables.FirstOrDefault(x => x.AllowTab);
+
+        if (first != null)
+            SelectOption(first);
     }
 
     /// <summary>
