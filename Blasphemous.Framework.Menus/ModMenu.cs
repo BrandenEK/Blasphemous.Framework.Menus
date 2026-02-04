@@ -35,8 +35,12 @@ public abstract class ModMenu
 
     /// <summary>
     /// Called when this specific menu is opened
+    /// By default it automatically selects the first selectable option
     /// </summary>
-    public virtual void OnShow() { }
+    public virtual void OnShow()
+    {
+        UI.SelectFirstOption();
+    }
 
     /// <summary>
     /// Called when this specific menu is closed
